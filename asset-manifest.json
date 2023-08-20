@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/buyer-bay/static/css/main.85690fa7.css",
+    "main.js": "/buyer-bay/static/js/main.04e10faa.js",
+    "static/js/787.47042638.chunk.js": "/buyer-bay/static/js/787.47042638.chunk.js",
+    "index.html": "/buyer-bay/index.html",
+    "main.85690fa7.css.map": "/buyer-bay/static/css/main.85690fa7.css.map",
+    "main.04e10faa.js.map": "/buyer-bay/static/js/main.04e10faa.js.map",
+    "787.47042638.chunk.js.map": "/buyer-bay/static/js/787.47042638.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85690fa7.css",
+    "static/js/main.04e10faa.js"
+  ]
+}
