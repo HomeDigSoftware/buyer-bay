@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/buyer-bay/static/css/main.85690fa7.css",
-    "main.js": "/buyer-bay/static/js/main.a5504fbc.js",
+    "main.js": "/buyer-bay/static/js/main.1fda65ed.js",
     "static/js/787.47042638.chunk.js": "/buyer-bay/static/js/787.47042638.chunk.js",
     "index.html": "/buyer-bay/index.html",
     "main.85690fa7.css.map": "/buyer-bay/static/css/main.85690fa7.css.map",
-    "main.a5504fbc.js.map": "/buyer-bay/static/js/main.a5504fbc.js.map",
+    "main.1fda65ed.js.map": "/buyer-bay/static/js/main.1fda65ed.js.map",
     "787.47042638.chunk.js.map": "/buyer-bay/static/js/787.47042638.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85690fa7.css",
-    "static/js/main.a5504fbc.js"
+    "static/js/main.1fda65ed.js"
   ]
 }
