@@ -36,7 +36,7 @@ const LolLeauge = () => {
   return(
    // <BrowserRouter>
       <Routes>
-        <Route path='/' Component={HomePage}/>
+        <Route path='/buyer-bay' Component={HomePage}/>
         <Route path='/dota' Component={Dota}/>
         {/* <Route path='/lol' Component={Lol}/>
         <Route path='/lol/:leaugeid' Component={LolLeauge}/>       */}
@@ -50,7 +50,7 @@ const LolLeauge = () => {
   // var element = <HomePage/>;
   return (
     <div >
-    <h1> CHOOSE  <br/> who ןs your winner</h1>
+    <h1> CHOISE  <br/> its all on you</h1>
     {/* <Link to="/dota">DOTA</Link> <br/>
     <Link to="/lol">LOL</Link> */}
     <div>{myRoutess()}</div>
