@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import HomePage from './component/homepage.component';
-import { Link , Routes, Route , matchPath } from "react-router-dom";
+import { Link , Routes, Route , RouterProvider } from "react-router-dom";
 
 const Dota = () => (
   <div>
@@ -15,9 +15,9 @@ const Lol = ()=> (
   </div>
 )
 
-const LolLeauge = () => {
+const LolLeauge = (props) => {
  // let data = this.props.match.params;
-  
+  console.log(RouterProvider)
  
  return( 
  <div>
@@ -37,9 +37,9 @@ const LolLeauge = () => {
    // <BrowserRouter>
       <Routes>
         <Route path='/buyer-bay' Component={HomePage}/>
-        <Route path='/dota' Component={Dota}/>
-        {/* <Route path='/lol' Component={Lol}/>
-        <Route path='/lol/:leaugeid' Component={LolLeauge}/>       */}
+        <Route path='/buyer-bay/dota' Component={Dota}/>
+        <Route path='/buyer-bay/lol' Component={LolLeauge}/>
+        {/* <Route path='/buyer-bay/lol/:leaugeid' Component={LolLeauge}/>       */}
       </Routes>
       
    // </BrowserRouter>
@@ -51,8 +51,9 @@ const LolLeauge = () => {
   return (
     <div >
     <h1> CHOISE  <br/> its all on you</h1>
-    {/* <Link to="/dota">DOTA</Link> <br/>
-    <Link to="/lol">LOL</Link> */}
+    <Link to="/buyer-bay">Home</Link> <br/>
+    <Link to="/buyer-bay/dota">Dota</Link> 
+    <Link to="/buyer-bay/lol">Lol</Link>
     <div>{myRoutess()}</div>
     </div>
   )
