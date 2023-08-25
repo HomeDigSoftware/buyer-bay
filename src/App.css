@@ -4,5 +4,14 @@ body {
 
 h1{
     text-align: center;
+     color: #880101;
+     font-size: 40px;
    
+}
+h2{
+    text-align: center;
+    color: #880101;
+    font-size: 25px;
+    
+    
 }
