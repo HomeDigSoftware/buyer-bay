@@ -4,28 +4,21 @@ import HomePage from './component/homepage.component';
 import { createBrowserRouter, Link, Routes, Route, RouterProvider, createRoutesFromElements } from "react-router-dom";
 import RootLayout from './component/layout/RootLayout.component';
 import './component/menu-item/menu-item.style.scss'
+import LolPage from './component/Lol-Page/Lolpage.component'
+import PandaScore from './component/Lol-Page/PandaScore.component';
 
 
- 
+
 const Dota = () => {
   return (
     <div>
       <h1>DOTA page</h1>
-   
+
     </div>
   )
 };
 
-const Lol = () => {
-  return (
-    <div>
-      <h1>LOL page</h1>
-      <div className='background-image'>
-      < img src='https://i.insider.com/619ed13c1ca5280018113cf9?width=1136&format=jpeg' alt='' ></img>
-      </div>
-    </div>
-  )
-}
+
 
 const LolLeauge = () => {
   // let data = this.props.match.params;
@@ -43,22 +36,23 @@ const LolLeauge = () => {
 //   strict: false 
 // });
 
-function User(props){
+function User(props) {
   return console.log(
-   props.match.params.history
-    )
+    props.match.params.history
+  )
 }
 
 
 const NewRoute = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/buyer-bay' element={<RootLayout/>} >
+   
+    <Route path='/buyer-bay' element={<RootLayout />} >
       <Route index element={<HomePage />} />
-      <Route path='dota' element={<Dota/>} />
-      <Route path='lol' element={<Lol/>}  />
+      <Route path='dota' element={<Dota />} />
+      <Route path='lol' element={<LolPage />} />
       <Route path='/buyer-bay/:id' Component={User} />
     </Route>,
-      
+
     console.log()
     // {/* <Route path='/buyer-bay/lol/:leaugeid' Component={LolLeauge}/>       */}
 
@@ -84,8 +78,12 @@ function App() {
   // var path = '/';
   // var element = <HomePage/>;
   return (
-
-    <RouterProvider router={NewRoute} />
+    <div>
+     
+      <RouterProvider router={NewRoute} />
+     
+      
+    </div>
     // <div >
     // <h1 className='first-h1'> CHOISE </h1>
     // <h2> its all on you</h2>

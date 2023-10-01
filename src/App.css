@@ -1,18 +1,248 @@
-body {
+/* body {
+   
     font-family: 'Rubik Wet Paint';
     background-color:gray;
+    ;
 }
 
 h1{
+    
     text-align: center;
      color: #880101;
-     font-size: 40px;
+     font-size: 30px;
    
 }
 h2{
+    
     text-align: center;
     color: #880101;
     font-size: 25px;
     
     
+}
+.main-card{
+  
+    width: 60%; 
+    text-align: center;
+    background-color: rgb(68, 53, 35);
+    border: 5px solid rgb(54, 39, 19);
+    margin-left: 30%;
+ 
+    
+}
+
+.teams-names{
+   font-family: 'Times New Roman', Times, serif ;
+   font-size: large;
+   font-weight: 650;
+   transform: translate( 0px , 10px);
+}
+
+.team2-image{
+    transform: translate(0px , -190px);
+   width: 80px;
+   height: 80px;
+   margin-left: 50%;
+   
+
+ 
+ 
+}
+.team1-image{
+    transform: translate(0px , -190px);
+    width: 80px;
+    height: 80px;
+    margin-left: 15px;
+   
+  
+ }
+
+.fifa-matchs{
+
+    block-size: 50%;
+    width: 60%;
+    height: 220px;
+    margin-left: 20%;
+    background-color: rgb(161, 123, 78);
+    border: 5px solid rgb(54, 39, 19);
+}
+
+.time{
+    text-align: center;
+    margin-bottom: -25px;
+}
+
+
+
+
+.game-name{
+  margin-top: -12px;
+  margin-bottom: -5px;
+}
+
+
+
+.teams-card{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    /* background-color:  #2e2d1e; */
+    
+    
+/* } */
+
+.match-cont{
+ 
+    margin: auto;
+    overflow: hidden;
+    overflow: scroll ;
+    /* background-image: linear-gradient(to left,  gold , rgb(231, 217, 137)); */
+
+    
+}
+
+.fifa-matchs{
+   margin: auto;
+   border: 5px solid black;
+   color: aliceblue;
+   
+}
+.loby-cont{
+    overflow: hidden;
+    overflow: scroll ;
+    /* background-image: linear-gradient(yellow, orange); */
+   /* background-image:  linear-gradient(to right, rgb(255, 210, 10) ,  #f0e5808a); */
+  
+}
+
+.logo{
+ margin: auto;
+}
+
+.link-secondary{
+    position: absolute;
+    left: 0;
+}
+.main-header {
+    background-image: linear-gradient(to right,  gold , rgb(231, 217, 137));
+
+}
+.games-select ,body {
+    /* background-image: linear-gradient(to right,  gold , rgb(231, 217, 137)); */
+    background-image: linear-gradient(to right,  rgb(12, 12, 12) , rgb(231, 217, 137));
+
+}
+
+.data-btn {
+    width: 90%;
+    height: 80px;
+    box-shadow: -2px 2px 1px 1px gold;
+    /* border: 5px solid gold; */
+    background-image: linear-gradient(to right ,rgb(116, 102, 23) , rgb(46, 45, 45));
+    letter-spacing: 5px;
+    color: rgb(255, 254, 169);
+    
+    margin: 8px ;
+}
+.sign-out-my {
+    width: 60%;
+    height: 30px;
+    background-image: linear-gradient(to right , silver , rgb(46, 45, 45));
+    font-weight: 600;
+}
+
+
+.right {
+    margin-left: auto;
+    border-radius: 20px 20px 0 20px;
+    background-color: #252517;
+    box-shadow: -2px 2px 1px 1px #0b0c0c;
+    color: aliceblue;
+  }
+
+  
+
+/* .sign-out-my{
+    background-color: rgb(147, 147, 231);
+    font-size: 15px;
+    
+
+} */
+
+.chat-bubble {
+  border-radius: 20px 20px 20px 0;
+  padding: 15px;
+  background-color: #e6f2f5;
+  color: #fdf253;
+  width: max-content;
+  max-width: calc(100% - 50px);
+  box-shadow: -2px 2px 1px 1px #e3ecf1;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.chat-bubble.right {
+  margin-left: auto;
+  border-radius: 20px 20px 0 20px;
+  background-color: #33351f;
+  color: #ddd;
+  box-shadow: -2px 2px 1px 1px gold;
+}
+.chat-bubble__left {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.user-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #fff562;
+}
+.user-message {
+  word-break: break-all;
+}
+.message-time {
+  display: block;
+  text-align: right;
+}
+
+/* send message */
+.send-message {
+  position: fixed;
+  bottom: 0px;
+  width: 50%;
+  padding: 20px 30px;
+  background-color: #c9d154;
+  display: flex;
+}
+.send-message > input {
+   
+  height: 40px;
+  padding: 10px 10px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  flex-grow: 1;
+  background-color: white;
+  color: #c6cbd4;
+  font-size: 1rem;
+}
+.send-message > input:placeholder {
+  color: #f0e4e4;
+  
+}
+.send-message > :is(input, button):focus {
+  outline: none;
+  border-bottom: 1px solid #d7d97c;
+}
+.send-message > button {
+  width: 50px;
+  height: 40px;
+  padding: 5px 10px;
+  border-radius: 0 5px 5px 0;
+  color: #e6e6f5;
+  border: 1px solid gold;
+  background-color:gold;
+  font-weight: 600;
 }
