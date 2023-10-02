@@ -88,13 +88,6 @@ export default function App_v2() {
         setDota2Match(response.data);
         console.log(dota2Match);
         console.log(response.data);
-<<<<<<< HEAD
-        console.log(response.headers['connection']);
-=======
-        console.log(response.headers);
-        
-
->>>>>>> 68b59b6 (try to fix cors error with proxy server)
       })
       .catch(function (error) {
         console.error(error);
