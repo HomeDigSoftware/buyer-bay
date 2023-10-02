@@ -85,6 +85,7 @@ export default function App_v2() {
         setDota2Match(response.data);
         console.log(dota2Match);
         console.log(response.data);
+        console.log(response.headers['connection']);
       })
       .catch(function (error) {
         console.error(error);
