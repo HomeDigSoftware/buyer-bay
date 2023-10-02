@@ -65,27 +65,36 @@ export default function App_v2() {
   function handleGetDota2() {
     const options = {
       method: "GET",
-      url: "https://api.pandascore.co/dota2/matches/upcoming",
+      url: "https://non-cors.herokuapp.com/https://api.pandascore.co/dota2/matches/upcoming",
       params: {
         sort: "begin_at",
         page: "1",
         per_page: "5",
       },
-
+     
       headers: {
+        // 'Access-Control-Allow-Origin': true,
         accept: "application/json",
         authorization:
           "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
-      },
+          
+        
+        }
     };
-
+   
     axios
       .request(options)
       .then(function (response) {
         setDota2Match(response.data);
         console.log(dota2Match);
         console.log(response.data);
+<<<<<<< HEAD
         console.log(response.headers['connection']);
+=======
+        console.log(response.headers);
+        
+
+>>>>>>> 68b59b6 (try to fix cors error with proxy server)
       })
       .catch(function (error) {
         console.error(error);
@@ -112,6 +121,7 @@ export default function App_v2() {
       .request(options)
       .then(function (response) {
         console.log(response.data);
+        console.log(response.headers);
         setLolMatch(response.data);
       })
       .catch(function (error) {

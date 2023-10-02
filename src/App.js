@@ -46,7 +46,7 @@ function User(props) {
 const NewRoute = createBrowserRouter(
   createRoutesFromElements(
    
-    <Route path='/buyer-bay' element={<RootLayout />} >
+    <Route path='/' element={<RootLayout />} >
       <Route index element={<HomePage />} />
       <Route path='dota' element={<Dota />} />
       <Route path='lol' element={<LolPage />} />
