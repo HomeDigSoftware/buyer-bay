@@ -61,7 +61,7 @@ export default function App_v2() {
         console.error(error);
       });
   }
-
+// for the git push have to add somting
   function handleGetDota2() {
     const options = {
       method: "GET",
