@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/buyer-bay/static/css/main.8f19871d.css",
-    "main.js": "/buyer-bay/static/js/main.8dbdc523.js",
+    "main.css": "/buyer-bay/static/css/main.93931e9f.css",
+    "main.js": "/buyer-bay/static/js/main.9dbaf097.js",
     "static/media/logo-no-background.png": "/buyer-bay/static/media/logo-no-background.18cfbbe8136550ce4fcd.png",
     "index.html": "/buyer-bay/index.html",
-    "main.8f19871d.css.map": "/buyer-bay/static/css/main.8f19871d.css.map",
-    "main.8dbdc523.js.map": "/buyer-bay/static/js/main.8dbdc523.js.map"
+    "main.93931e9f.css.map": "/buyer-bay/static/css/main.93931e9f.css.map",
+    "main.9dbaf097.js.map": "/buyer-bay/static/js/main.9dbaf097.js.map"
   },
   "entrypoints": [
-    "static/css/main.8f19871d.css",
-    "static/js/main.8dbdc523.js"
+    "static/css/main.93931e9f.css",
+    "static/js/main.9dbaf097.js"
   ]
 }
