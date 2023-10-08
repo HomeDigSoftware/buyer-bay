@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import supabase from "../../services/supabase";
-import { Auth, AuthCard, MagicLink, SignIn } from "@supabase/auth-ui-react";
-import ChatBox from "./ChatBox";
 import '../../App.css'
 
 export default function SupaBaseSingIn() {
   const [supaUser, setsupaUser] = useState({});
+  const [newDbMessage, setNewDbMessage] = useState("");
   const [dbMessage, setDbMessage] = useState({});
+  const [click, setClick] = useState(false);
+   const scroll = useRef();
+
 
   const HandleSingIn = async () => {
-
-    // supabase.auth.singIn({provider : 'google'})
-    // supabase.auth.signInWithOAuth({
-    //   provider: 'google',
-    // })
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -31,32 +28,34 @@ export default function SupaBaseSingIn() {
   async function handleSingOutUser() {
     const { error } = await supabase.auth.signOut();
     setsupaUser({});
+    setClick(false);
   }
 
 
-  async function getAllMessages() {
-
+  const getAllMessages = async () => {
     let { data: messages, error } = await supabase
       .from('messages')
       .select('*')
-      setDbMessage({messages});
-      messages.map((message) => {      
-        console.log(message);
-          <ChatMessages dbMessagedata={messages} 
-                        key={message.id} 
-                        supaUser={supaUser} />
-      })
-    
-   //   console.log(setDbMessage)
- 
+    messages.map((data) => {
+      console.log(data);
+    })
+    dbDataMessages(messages);
   }
 
-  async function handleSendMessage() {
+
+  function dbDataMessages(dbData) {
+    setDbMessage(dbData)
+    setClick(true)
+  }
+
+
+  async function handleSendMessage(e) {
+    e.preventDefault();
     const { data, error } = await supabase
       .from('messages')
       .insert([
         {
-          message: 'testing the auth',
+          message: newDbMessage,
           name: supaUser.user_metadata.name,
           avatar: supaUser.user_metadata.avatar_url,
           created_at: supaUser.created_at,
@@ -64,8 +63,9 @@ export default function SupaBaseSingIn() {
         }
       ])
       .select()
-
+      setNewDbMessage("");
     console.log("sending", supaUser.aud)
+    getAllMessages();
   }
 
   useEffect(() => { 
@@ -79,6 +79,7 @@ export default function SupaBaseSingIn() {
       })
     }
     getUserData();
+    getAllMessages();
   }, [])
 
 
@@ -93,53 +94,58 @@ export default function SupaBaseSingIn() {
   })
   return (
     <div>
-      <LoginButton onSingin={HandleSingIn}/>
+      <div>
+      {supaUser.aud === "authenticated" ? <h5> {supaUser.aud}</h5> : <h4> Not authenticated</h4>}
+      </div>
+      <LoginButton onSingin={HandleSingIn} />
       <SingoutButton onSingOut={handleSingOutUser} />
-      {/* <ChatMessages
-        supaUser={supaUser}
-        onSendMessage={handleSendMessage}
-        getAllMessages={getAllMessages}
-        dbMessage={dbMessage}
-      /> */}
-      {supaUser? <div> Not loged in </div> : <GetChatMessages supaUser={supaUser} dbMessage={dbMessage}/>}
-      {/* <Auth
-        supabaseClient={supabase}
-        //  Auth, AuthCard, ForgottenPassword, MagicLink, SignIn, SignUp, SocialAuth, UpdatePassword, VerifyOtp
-        appearance={{ theme: Auth }}
-        theme="dark"
-        providers={["google", "twitch"]}
-     
-      /> */}
+      <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click} scroll={scroll} />
+      <form onSubmit={(e) => handleSendMessage(e)} className="send-message">
+        <label htmlFor="messageInput" hidden>
+          Supabase Enter Message
+        </label>
+        <input
+          id="messageInput"
+          name="messageInput"
+          type="text"
+          className="form-input__input"
+          placeholder="type message..."
+          value={newDbMessage}
+          onChange={(e) => setNewDbMessage(e.target.value)}
 
+        />
+
+        <button type="submit">Send</button>
+      </form>
     </div>
   )
 }
 
-{/* <div>
-        {csgoMatch.map((data) => (
-          <CsGo data={data} key={data.id} />
-        ))}
-      </div> */}
 
-//  function CsgoGetMatch({ csgoMatch, onGetCsgoData }) {
-//   return (
-//     <div>
-//       {/* <button className="data-btn" onClick={onGetCsgoData}>
-//               CS-GO
-//             </button> */}
-//       <div>
-//         {messages.map((message) => (
-//           <ChatMessages message={message} key={message.id} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
+function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click ,scroll}) {
+
+  return (
+    <div>
+      <button onClick={onGetMessagees}>
+        get old messagees
+      </button>
+      <div>
+        {click ? <div> {dbMessage.map((dbMessagedata) => (
+          <ChatMessages dbMessagedata={dbMessagedata}
+            key={dbMessagedata.id}
+            supaUser={supaUser}
+            scroll={scroll}
+          />))}  </div> : <div> </div>}
+      </div>
+    </div>
+  )
+}
+
 function SingoutButton({ onSingOut }) {
   return (
     <div className='valorant-card'>
       <button className="data-btn" onClick={onSingOut}>
-       Supabaes Singout
+        Supabaes Singout
       </button>
     </div>
   );
@@ -149,65 +155,38 @@ function LoginButton({ onSingin }) {
   return (
     <div className='valorant-card'>
       <button className="data-btn" onClick={onSingin}>
-      Supabaes singIn
+        Supabaes Login with google
       </button>
     </div>
   );
 }
 
-function GetChatMessages({ supaUser, dbMessage }) {
- console.log(dbMessage)
-  return (
-    <div>
-      {/* <button className="data-btn" onClick={onGetCsgoData}>
-              CS-GO
-            </button> */}
-    {!supaUser ? <div> </div> :  <div>
-        {dbMessage.map((dbMessagedata) => (
-          <ChatMessages dbMessagedata={dbMessagedata}
-                        key={dbMessagedata.id} 
-                        supaUser={supaUser}
-                        />
-        ))}
-      </div>}
-    </div>
-  );
-}
 
-function ChatMessages({ dbMessagedata, supaUser, onSendMessage, getAllMessages }) {
+
+function ChatMessages({ dbMessagedata, supaUser , scroll }) {
+  // const scroll = useRef();
   return (
     <div>
+      <div> 
+      </div>
       <div>
-        ther is a user login
-        <>
-          <button style={{ backgroundColor: "gray", margin: "5px" }} onClick={onSendMessage}>Send</button>
-        </>
-      </div> 
         <div>
-   
-            <div>
-              {console.log(supaUser?.aud)}
-              <div className={`chat-bubble ${dbMessagedata?.id === supaUser.id ? "right" : ""}`}>
-                <img
-                  className="chat-bubble__left"
-                  src={dbMessagedata?.avatar}
-                  alt="user avatar"
-                />
-                <div className="chat-bubble__right">
-                  <p className="user-name">{dbMessagedata?.name}</p>
-                  <p className="user-message">{dbMessagedata?.text}
-                  </p>
-                  <button style={{ backgroundColor: "gray", margin: "5px" }} onClick={onSendMessage}>Send</button> <br />
-                  <button style={{ backgroundColor: "gray", margin: "5px" }} onClick={getAllMessages}>getmessage</button>
-                </div>
-              </div>
-             <LoginButton />
-
-              authenticated</div>
-             <div>
-               <button style={{ backgroundColor: "gray", margin: "5px" }} onClick={getAllMessages}>getmessage</button>
-              NOT authenticated</div>
+          <div className={`chat-bubble ${dbMessagedata?.uid === supaUser.id ? "right" : ""}`}>
+            <img
+              className="chat-bubble__left"
+              src={dbMessagedata?.avatar}
+              alt="user avatar"
+            />
+            <div className="chat-bubble__right">
+              <p className="user-name">{dbMessagedata?.name}</p>
+              <p className="user-message">{dbMessagedata?.message}
+              
+              </p>
+            </div>
+            <span ref={scroll}></span>
+          </div>
         </div>
+      </div>
     </div>
   )
 }
