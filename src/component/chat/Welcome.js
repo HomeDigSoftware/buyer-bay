@@ -5,14 +5,26 @@ import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import '../../App.css'
 import { useEffect, useState } from "react";
 import supabase from "../../services/supabase";
-import { getMessages } from "../../services/apiMessages"; 
+import { getMessages } from "../../services/apiMessages";
+import { Auth , AuthCard, MagicLink, SignIn, ThemeSupa } from "@supabase/auth-ui-react";
 
 const Welcome = () => {
   const [countries, setCountries] = useState([]);
-  
-  useEffect(function(){
-    getMessages().then((data , i) => console.log(data[0].message));
+
+  useEffect(function () {
+    getMessages().then((data, i) => console.log(data[0].message));
   }, [])
+
+  async function insertSupaBase() {
+    const { data, error } = await supabase
+      .from('messages')
+      .insert([
+        { message: 'testing insert to supabase' },
+      ])
+      .select()
+  }
+
+
 
   // useEffect(() => {
   //   getCountries();
@@ -28,20 +40,13 @@ const Welcome = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
     console.log("clickingggggggg")
-    
+
   };
 
+
+
  
-  
-  const supaBaseSingIn = () => {
-    
-    // supabase.auth.singIn({provider : 'google'})
-    supabase.auth.signInWithOAuth({
-      provider: 'google',
-    })
-        // console.log('Supabase Instance: ', supabase)
-  }
-  
+
   return (
     <main className="welcome">
       <h2>Find a rival </h2>
@@ -53,21 +58,10 @@ const Welcome = () => {
           src={GoogleSignin}
           alt="sign in with google"
           type="button"
-          
+
         />
       </button>
-      <ul>
-      <p>get message</p>
-      <button className="sign-in"  >
-        <img
-          onClick={supaBaseSingIn}
-          src=""
-          alt="sign in with google"
-          type="button"
-          
-        />
-      </button>
-      </ul>
+     
     </main>
   );
 };
