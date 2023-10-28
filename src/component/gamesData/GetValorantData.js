@@ -46,7 +46,7 @@ function handleGetValorant(setValorantMatch) {
 
 
 
-export function ValorantGetMatch({ valorantMatch, onGetValorantData }) {
+export function ValorantGetMatch({ valorantMatch }) {
   return (
     <div className='valor-card'>
       <div className=" clear-both text-center iteam-align-center justify-center ">

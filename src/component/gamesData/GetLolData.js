@@ -44,7 +44,7 @@ function handleGetLolData(setLolMatch) {
     });
 }
 
-export function LolGetMatch({ lolMatch}) {
+export function LolGetMatch({ lolMatch }) {
   return (
     <div>
       <div>

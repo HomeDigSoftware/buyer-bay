@@ -7,7 +7,6 @@ export default function SupaBaseSingIn() {
   const [newDbMessage, setNewDbMessage] = useState("");
   const [dbMessage, setDbMessage] = useState({});
   const [click, setClick] = useState(false);
-   const scroll = useRef();
 
 
   const HandleSingIn = async () => {
@@ -31,15 +30,17 @@ export default function SupaBaseSingIn() {
     setClick(false);
   }
 
-
+  
   const getAllMessages = async () => {
-    let { data: messages, error } = await supabase
+      if(supaUser.aud === "authenticated"){
+      let { data: messages, error } = await supabase
       .from('messages')
       .select('*')
-    messages.map((data) => {
-      console.log(data);
-    })
-    dbDataMessages(messages);
+      messages.map((data) => {
+        console.log(data);
+      })
+      dbDataMessages(messages);
+    }
   }
 
 
@@ -67,9 +68,11 @@ export default function SupaBaseSingIn() {
     console.log("sending", supaUser.aud)
     getAllMessages();
   }
+//_________________________________________________________________________
+useEffect(() => { 
+  async function getUserData() {
 
-  useEffect(() => { 
-    async function getUserData() {
+
       await supabase.auth.getUser().then((value) => {
         if (value.data?.user) {
           console.log(" This is the supauser : " ,value.data.user)
@@ -77,10 +80,12 @@ export default function SupaBaseSingIn() {
           // return
         }
       })
+    
     }
-    getUserData();
-    getAllMessages();
-  }, [])
+      getUserData(); 
+      getAllMessages();
+}, [])
+//_________________________________________________________________________
 
 
   supabase.auth.onAuthStateChange(async (event) => {
@@ -97,9 +102,9 @@ export default function SupaBaseSingIn() {
       <div>
       {supaUser.aud === "authenticated" ? <h5> {supaUser.aud}</h5> : <h4> Not authenticated</h4>}
       </div>
-      <LoginButton onSingin={HandleSingIn} />
-      <SingoutButton onSingOut={handleSingOutUser} />
-      <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click} scroll={scroll} />
+     {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : <div> <LoginButton onSingin={HandleSingIn} />
+       </div>}
+      <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click}  />
       <form onSubmit={(e) => handleSendMessage(e)} className="send-message">
         <label htmlFor="messageInput" hidden>
           Supabase Enter Message
@@ -112,9 +117,7 @@ export default function SupaBaseSingIn() {
           placeholder="type message..."
           value={newDbMessage}
           onChange={(e) => setNewDbMessage(e.target.value)}
-
         />
-
         <button type="submit">Send</button>
       </form>
     </div>
@@ -122,7 +125,8 @@ export default function SupaBaseSingIn() {
 }
 
 
-function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click ,scroll}) {
+function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click }) {
+  const scroll = useRef();
 
   return (
     <div>
@@ -134,9 +138,9 @@ function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click ,scroll}) {
           <ChatMessages dbMessagedata={dbMessagedata}
             key={dbMessagedata.id}
             supaUser={supaUser}
-            scroll={scroll}
           />))}  </div> : <div> </div>}
       </div>
+      <span ref={scroll}></span>
     </div>
   )
 }
@@ -163,7 +167,7 @@ function LoginButton({ onSingin }) {
 
 
 
-function ChatMessages({ dbMessagedata, supaUser , scroll }) {
+function ChatMessages({ dbMessagedata, supaUser  }) {
   // const scroll = useRef();
   return (
     <div>
@@ -183,7 +187,6 @@ function ChatMessages({ dbMessagedata, supaUser , scroll }) {
               
               </p>
             </div>
-            <span ref={scroll}></span>
           </div>
         </div>
       </div>

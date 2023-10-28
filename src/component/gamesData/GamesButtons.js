@@ -19,9 +19,9 @@ export function GamesButtons({  user}) {
     <div className='container-fluid text-center h-10 justify-center '>
 
       <div className=' row ' style={{ height: "80px" }}>
-        <div className='col-3'>one/1 </div>
-        <div className='col-6'>LOGO</div>
-        <div className='col-3'>Accunte Status </div>
+        <div className='col-3' style={{ color: "blue"}}> </div>
+        <div className='col-6'></div>
+        <div className='col-3'> </div>
       </div>
 
 
@@ -53,13 +53,13 @@ export function GamesButtons({  user}) {
             <h2> Chat  </h2> </div>
           <NavBar />
 
-          {!user ? <><Welcome /> S<SupabaseLogin /> </>: <ChatBox />}
+          {!user ? <><SupabaseLogin /> </>: <ChatBox />}
         </div>
       </div>
 
       <div className=' row' style={{ height: "160px" }}>
-        <div className='col-3'>three/1</div>
-        <div className='col-9'>three/2</div>
+        <div className='col-3'></div>
+        <div className='col-9'></div>
       </div>
 
     </div>

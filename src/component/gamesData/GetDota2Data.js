@@ -44,7 +44,7 @@ function handleGetDota2(setDota2Match) {
 }
 
 
-export function Dota2GetMatch({ dota2Match, onGetMatch }) {
+export function Dota2GetMatch({ dota2Match }) {
   return (
     <div>
       <div>

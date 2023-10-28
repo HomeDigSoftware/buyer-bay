@@ -10,9 +10,27 @@ import { Auth , AuthCard, MagicLink, SignIn, ThemeSupa } from "@supabase/auth-ui
 
 const Welcome = () => {
   const [countries, setCountries] = useState([]);
-
+  const [theData, setTheData] = useState();
+ 
   useEffect(function () {
-    getMessages().then((data, i) => console.log(data[0].message));
+  
+  async function check_user(){
+     
+      const { data: { user } } = await supabase.auth.getUser()
+
+      if (user !== null) 
+      { 
+        console.log(user.aud)
+        setTheData(user)
+        getMessages().then((data, i) => console.log(data[0].message));
+      }
+      else
+      {
+
+      }
+
+  }
+  check_user();
   }, [])
 
   async function insertSupaBase() {

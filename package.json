@@ -1,8 +1,8 @@
 {
-  "name": "buyer-bay",
+  "name": "Choice_allonyou",
   "version": "0.6.0",
   "private": true,
-  "homepage": "https://homedigsoftware.github.io/buyer-bay/",
+  "homepage": "https://homedigsoftware.github.io/Choice_allonyou/",
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.5",
     "@supabase/supabase-js": "^2.37.0",

@@ -44,7 +44,7 @@ function handleGetCSGOMatch(setCsgoMatch) {
 }
 
 
-export function CsgoGetMatch({csgoMatch}) {
+export function CsgoGetMatch({ csgoMatch }) {
  
 
   return (
