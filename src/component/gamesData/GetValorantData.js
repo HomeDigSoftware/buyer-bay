@@ -21,20 +21,23 @@ function handleGetValorant(setValorantMatch) {
 
   const options = {
     method: 'GET',
-    url: 'https://api.pandascore.co/valorant/matches/upcoming',
+    url: `https://api.pandascore.co/valorant/matches/upcoming?token=${pandaToken}`,
     params: {
       sort: 'begin_at',
       page: '1',
       per_page: '5'
     },
     headers: {
-     
+    //  'https://api.pandascore.co/videogames?token=PLACEHOLDER_TOKEN_VALUE' \
       accept: 'application/json',
-      authorization: `Bearer ${pandaToken}`,
+      // authorization: `Bearer ${pandaToken}`,
     //  withCredentials: true,
    //   'Access-Control-Allow-Origin': 'https//homedigsoftware.com',
-          
-    }
+    //       curl --request GET \
+    //  --url 'https://api.pandascore.co/videogames' \
+    //  --header 'Accept: application/json' \
+    //  --header 'Authorization: zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
+     }
   };
 
   axios

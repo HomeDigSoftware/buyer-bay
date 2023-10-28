@@ -130,7 +130,7 @@ function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click }) {
 
   return (
     <div>
-      <button onClick={onGetMessagees}>
+      <button style={{backgroundColor: "gray"}} onClick={onGetMessagees}>
         get old messagees
       </button>
       <div>
