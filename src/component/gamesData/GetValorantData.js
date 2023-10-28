@@ -4,11 +4,10 @@ import axios from 'axios';
 
 
 
-
 export function ValorantButton({ setValorantMatch }) {
   return (
     <div className='valorant-card'>
-      <button className="data-btn" onClick={() => handleGetValorant(setValorantMatch)}>
+      <button className="data-btn" onClick={() => handleGetValorant(setValorantMatch )}>
         Valorant
       </button>
     </div>
@@ -18,6 +17,7 @@ export function ValorantButton({ setValorantMatch }) {
 
 
 function handleGetValorant(setValorantMatch) {
+  const pandaToken = "zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0"
 
   const options = {
     method: 'GET',
@@ -28,8 +28,12 @@ function handleGetValorant(setValorantMatch) {
       per_page: '5'
     },
     headers: {
+     
       accept: 'application/json',
-      authorization: 'Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
+      authorization: `Bearer ${pandaToken}`,
+    //  withCredentials: true,
+   //   'Access-Control-Allow-Origin': 'https//homedigsoftware.com',
+          
     }
   };
 
