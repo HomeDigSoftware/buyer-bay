@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c070769e.css",
+    "main.js": "/static/js/main.2513a2af.js",
+    "static/media/logo-no-background.png": "/static/media/logo-no-background.18cfbbe8136550ce4fcd.png",
+    "static/media/fraction.cjs": "/static/media/fraction.a641cd80e2310e4e5e60.cjs",
+    "index.html": "/index.html",
+    "static/media/index.cjs": "/static/media/index.cd351d7c31d0d3fccf96.cjs",
+    "main.c070769e.css.map": "/static/css/main.c070769e.css.map",
+    "main.2513a2af.js.map": "/static/js/main.2513a2af.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c070769e.css",
+    "static/js/main.2513a2af.js"
+  ]
+}
