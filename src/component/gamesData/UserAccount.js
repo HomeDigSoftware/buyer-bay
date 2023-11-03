@@ -196,6 +196,7 @@ function SingelBat_Open({user_data, userTeam, userTeamName, bat }) {
 
     console.log(bat_steel_good, " <= GOOD : if bat is accpted ", bat.match_slug);
     console.log("the match_OK : " ,bat.match_ok , match_month , curr_month);
+    console.log("NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW CALLLLL");
 
 
 
