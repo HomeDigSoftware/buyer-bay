@@ -5,7 +5,7 @@ export const handler = async (event , context) => {
    const PANDA_API = "https://api.pandascore.co/lol/matches/upcoming"
    const options = { 
     method : "GET",
-    // mode : "no-cors",
+     mode : "no-cors",
     cache: "no-cache",
     credential: "same-origin",
     params: {
