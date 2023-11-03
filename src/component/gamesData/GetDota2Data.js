@@ -14,43 +14,43 @@ export function Dota2Button({ setDota2Match }) {
 }
 
 async function getDota2MatchApiCall(setDota2Match){
-  const server_getCall = (await fetch("/.netlify/functions/getDota2Api"))
+  const server_getDota2Call = (await fetch("/.netlify/functions/getDota2Api"))
 
-  const data = await server_getCall.text();
+  const data = await server_getDota2Call.text();
   // const data01 = JSON.parse(server_getCall);
  const dataText = JSON.parse(data);
   // console.log(" DATA :",data01)
    setDota2Match(dataText.upcoming);
 }
 
-function handleGetDota2(setDota2Match) {
-  const options = {
-    method: "GET",
-    url: "https://api.pandascore.co/dota2/matches/upcoming",
-    params: {
-      sort: "begin_at",
-      page: "1",
-      per_page: "5",
-    },
+// function handleGetDota2(setDota2Match) {
+//   const options = {
+//     method: "GET",
+//     url: "https://api.pandascore.co/dota2/matches/upcoming",
+//     params: {
+//       sort: "begin_at",
+//       page: "1",
+//       per_page: "5",
+//     },
 
-    headers: {
-      // 'Access-Control-Allow-Origin': true,
-      accept: "application/json",
-      authorization:
-        "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
-    }
-  };
+//     headers: {
+//       // 'Access-Control-Allow-Origin': true,
+//       accept: "application/json",
+//       authorization:
+//         "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
+//     }
+//   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      setDota2Match(response.data);
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-}
+//   axios
+//     .request(options)
+//     .then(function (response) {
+//       setDota2Match(response.data);
+//       console.log(response.data);
+//     })
+//     .catch(function (error) {
+//       console.error(error);
+//     });
+// }
 
 
 export function Dota2GetMatch({ dota2Match }) {
