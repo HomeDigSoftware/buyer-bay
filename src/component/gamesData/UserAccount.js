@@ -429,7 +429,7 @@ async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamDa
           })
         //  .then(server_response => server_response.text);
         const theData = await server_response.text();
-        console.log(theData.upcoming);
+        console.log(" new API call test", theData.upcoming);
         const text = JSON.parse(theData)
         console.log(text.upcoming);
         // setValorantMatch(text.upcoming)
@@ -442,55 +442,55 @@ async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamDa
 } 
 
 
-function check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter) {
+// function check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter) {
   
-    let match_result = {};
-    // setCounter(counter++);
-    console.log("pandascore Api : lastbatid : => " , lastBatId , " the bat id :=>" , bat.id)
-    console.log("pandascore Api userteam : => " , userTeam , " tokens"  ,  bat.tokens)
-    // if(lastBatId === bat.id){
-    //         return
-    // }
-    // else
-    // {
+//     let match_result = {};
+//     // setCounter(counter++);
+//     console.log("pandascore Api : lastbatid : => " , lastBatId , " the bat id :=>" , bat.id)
+//     console.log("pandascore Api userteam : => " , userTeam , " tokens"  ,  bat.tokens)
+//     // if(lastBatId === bat.id){
+//     //         return
+//     // }
+//     // else
+//     // {
       
-//__________________________________________________________________________________________________________________________________________________________
-const options = {
-    method: 'GET',
-    url: `https://api.pandascore.co/matches/${bat.match_slug}`,
-        // url: "https://api.pandascore.co/matches/ucam-esports-club-2023-10-25",  //https://api.pandascore.co/matches/ucam-esports-club-2023-10-25
-        headers: {
-            accept: 'application/json',
-            authorization: 'Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
-        }
-    };
+// //__________________________________________________________________________________________________________________________________________________________
+// const options = {
+//     method: 'GET',
+//     url: `https://api.pandascore.co/matches/${bat.match_slug}`,
+//         // url: "https://api.pandascore.co/matches/ucam-esports-club-2023-10-25",  //https://api.pandascore.co/matches/ucam-esports-club-2023-10-25
+//         headers: {
+//             accept: 'application/json',
+//             authorization: 'Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
+//         }
+//     };
 
-    axios
-        .request(options)
-        .then(function (response) {
-            console.log("response : =>" , "bat_id :" , bat.id, response.data?.winner) ;
-            console.log("response : =>" , "bat_id + data:" , bat.id, response.data) ;
-            if(response.data.winner !== null){    //________________________________
-                 setWinnerTeam(response.data.winner.id)  //________________________________
-                 setWinnerTeamData(response.data)    //________________________________
-            match_result = response?.data;
-            console.log(" the match slug", bat?.match_slug);
-            console.log(" the match get match_result", match_result.winner?.id);
-            console.log(" the match get response", response.data.winner?.id);
-            console.log(response.data ,"bat_id " , bat.id," _____________________________________________________________");
-            console.log( " the match get", response.data.winner?.slug);
-            winnerUpdate(user_data, userTeam , response.data ,bat.tokens )  //_________________
-        }
+//     axios
+//         .request(options)
+//         .then(function (response) {
+//             console.log("response : =>" , "bat_id :" , bat.id, response.data?.winner) ;
+//             console.log("response : =>" , "bat_id + data:" , bat.id, response.data) ;
+//             if(response.data.winner !== null){    //________________________________
+//                  setWinnerTeam(response.data.winner.id)  //________________________________
+//                  setWinnerTeamData(response.data)    //________________________________
+//             match_result = response?.data;
+//             console.log(" the match slug", bat?.match_slug);
+//             console.log(" the match get match_result", match_result.winner?.id);
+//             console.log(" the match get response", response.data.winner?.id);
+//             console.log(response.data ,"bat_id " , bat.id," _____________________________________________________________");
+//             console.log( " the match get", response.data.winner?.slug);
+//             winnerUpdate(user_data, userTeam , response.data ,bat.tokens )  //_________________
+//         }
         
-    })
-    .catch(function (error) {
-        console.error(error);
-    });
+//     })
+//     .catch(function (error) {
+//         console.error(error);
+//     });
 
-    // }
+//     // }
     
-}
-//__________________________________________________________________________________________________________________________________________________________
+// }
+// //__________________________________________________________________________________________________________________________________________________________
 
 
 
