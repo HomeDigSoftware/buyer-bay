@@ -421,7 +421,7 @@ function SingelBat_On({ userTeam, userTeamName, bat }) {
 
 async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter){
    
-        // console.log("start")
+        onsole.log("start")
         const server_response = await fetch('/.netlify/functions/checkWinnerApi' , {
             method: "POST" , 
             body: JSON.stringify({
