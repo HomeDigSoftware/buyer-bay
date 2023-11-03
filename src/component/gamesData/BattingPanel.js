@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../../App.css'
 import { setUserId } from 'firebase/analytics';
-import supabase from '../../services/supabase';
+import supabase from '../../services/supabase.js';
 import axios from 'axios';
 import { wait } from '@testing-library/user-event/dist/utils';
 

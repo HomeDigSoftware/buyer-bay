@@ -4,8 +4,8 @@ import { auth } from "../../firebase";
 import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import '../../App.css'
 import { useEffect, useState } from "react";
-import supabase from "../../services/supabase";
-import { getMessages } from "../../services/apiMessages";
+import supabase from "../../services/supabase.js";
+import { getMessages } from "../../services/apiMessages.js";
 import { Auth , AuthCard, MagicLink, SignIn, ThemeSupa } from "@supabase/auth-ui-react";
 
 const Welcome = () => {

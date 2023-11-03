@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
-import BattingPanel from './BattingPanel';
+import BattingPanel from './BattingPanel.js';
 import { useAsyncValue } from 'react-router-dom';
-import supabase from '../../services/supabase';
+import supabase from '../../services/supabase.js';
 import "../../App.css"
 
 

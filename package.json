@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "private": true,
   "homepage": "https://homedigsoftware.com/",
-  "type": "module",
+  
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.5",
     "@supabase/supabase-js": "^2.37.0",

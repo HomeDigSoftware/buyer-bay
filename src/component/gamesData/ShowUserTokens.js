@@ -1,6 +1,6 @@
-import AddTokens from "./AddTokens"
+import AddTokens from "./AddTokens.js"
 import React, { useEffect, useState , useRef } from "react";
-import supabase from "../../services/supabase";
+import supabase from "../../services/supabase.js";
 
 
 export default function ShowUserTokens({userToken}){

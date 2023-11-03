@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Logo from './logo-package-GOLD/png/logo-no-background.png';
 import "./App.css"
-import AddTokens from "./component/gamesData/AddTokens"
-import ShowUserTokens from './component/gamesData/ShowUserTokens';
-import BatUpdate from './component/gamesData/BatUpdate';
-import UserAccount from './component/gamesData/UserAccount';
-import supabase from './services/supabase';
+import AddTokens from "./component/gamesData/AddTokens.js"
+import ShowUserTokens from './component/gamesData/ShowUserTokens.js';
+import BatUpdate from './component/gamesData/BatUpdate.js';
+import UserAccount from './component/gamesData/UserAccount.js';
+import supabase from './services/supabase.js';
 
 export function SiteHeader() {
     const [userTokens, setUserTokens] = useState("");

@@ -1,18 +1,27 @@
 import React from 'react';
 import axios from "axios";
-import TeamCard from './TeamCard';
+import TeamCard from './TeamCard.js';
 
 
 export function Dota2Button({ setDota2Match }) {
   return (
     <div className='valorant-card'>
-      <button className="data-btn" onClick={()=> handleGetDota2(setDota2Match)}>
+      <button className="data-btn" onClick={()=> getDota2MatchApiCall(setDota2Match)}>
         DOTA 2
       </button>
     </div>
   );
 }
 
+async function getDota2MatchApiCall(setDota2Match){
+  const server_getCall = (await fetch("/.netlify/functions/getDota2Api"))
+
+  const data = await server_getCall.text();
+  // const data01 = JSON.parse(server_getCall);
+ const dataText = JSON.parse(data);
+  // console.log(" DATA :",data01)
+   setDota2Match(dataText.data);
+}
 
 function handleGetDota2(setDota2Match) {
   const options = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamCard from './TeamCard';
+import TeamCard from './TeamCard.js';
 import axios from 'axios';
 
 
@@ -19,7 +19,7 @@ export function ValorantButton({ setValorantMatch }) {
 
 async function onGetData(setValorantMatch){
   // console.log("start")
-  const server_response = await fetch('/.netlify/functions/getValorantApi')
+  const server_response = await fetch('/.netlify/functions/getValorantApi' )
   //  .then(server_response => server_response.text);
   const theData = await server_response.text();
   console.log(theData.upcoming);

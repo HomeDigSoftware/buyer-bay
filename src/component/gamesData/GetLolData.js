@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import TeamCard from './TeamCard';
+import TeamCard from './TeamCard.js';
 
 
 

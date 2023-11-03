@@ -4,8 +4,8 @@ import axios from "axios";
 import './App.css'
 import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { GamesButtons } from './component/gamesData/GamesButtons';
-import { SiteHeader } from './SiteHeader';
+import { GamesButtons } from './component/gamesData/GamesButtons.js';
+import { SiteHeader } from './SiteHeader.js';
 
 
 export default function App_v2() {

@@ -1,13 +1,13 @@
 import React from 'react';
-import ChatBox from "../chat/ChatBox";
+import ChatBox from "../chat/ChatBox.js";
 import Welcome from "../chat/Welcome";
-import NavBar from "../firebase/Navbar";
-import SupabaseLogin from "../chat/SupabaseLogin"
+import NavBar from "../firebase/Navbar.js";
+import SupabaseLogin from "../chat/SupabaseLogin.js"
 import { useState } from 'react';
-import { Dota2Button, Dota2GetMatch } from './GetDota2Data';
-import { LolButton, LolGetMatch } from './GetLolData';
-import { CsgoButton, CsgoGetMatch } from './GetCsgoData';
-import { ValorantButton, ValorantGetMatch } from './GetValorantData';
+import { Dota2Button, Dota2GetMatch } from './GetDota2Data.js';
+import { LolButton, LolGetMatch } from './GetLolData.js';
+import { CsgoButton, CsgoGetMatch } from './GetCsgoData.js';
+import { ValorantButton, ValorantGetMatch } from './GetValorantData.js';
 
 export function GamesButtons({  user}) {
   const [csgoMatch, setCsgoMatch] = useState([]);
