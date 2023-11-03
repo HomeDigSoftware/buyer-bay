@@ -24,7 +24,7 @@ async function getMatchNewApiCall(setCsgoMatch){
   // const data01 = JSON.parse(server_getCall);
  const dataText = JSON.parse(data);
   // console.log(" DATA :",data01)
-   setCsgoMatch(dataText.data);
+   setCsgoMatch(dataText.upcoming);
 }
 
 function handleGetCSGOMatch(setCsgoMatch) {

@@ -1,8 +1,4 @@
 
-
-
-
-
 export const handler = async (event , context) => {
     console.log(" the handler event",{event})
     console.log(" the handler context",{context})

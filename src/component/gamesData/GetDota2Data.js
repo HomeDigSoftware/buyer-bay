@@ -20,7 +20,7 @@ async function getDota2MatchApiCall(setDota2Match){
   // const data01 = JSON.parse(server_getCall);
  const dataText = JSON.parse(data);
   // console.log(" DATA :",data01)
-   setDota2Match(dataText.data);
+   setDota2Match(dataText.upcoming);
 }
 
 function handleGetDota2(setDota2Match) {

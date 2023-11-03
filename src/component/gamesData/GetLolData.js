@@ -9,11 +9,22 @@ import TeamCard from './TeamCard.js';
 export function LolButton({ setLolMatch }) {
   return (
     <div className='valorant-card'>
-      <button className="data-btn" onClick={() => handleGetLolData(setLolMatch)}>
+      <button className="data-btn" onClick={() => getLolMatchApiCall(setLolMatch)}>
         League of Legend
       </button>
     </div>
   );
+}
+
+async function getLolMatchApiCall(setLolMatch){
+  console.log("fetching Data .... >>>")
+  const server_getCall = (await fetch("/.netlify/functions/getLola2Api"))
+
+  const data = await server_getCall.text();
+  // const data01 = JSON.parse(server_getCall);
+ const dataText = JSON.parse(data);
+  // console.log(" DATA :",data01)
+  setLolMatch(dataText.upcoming);
 }
 
 function handleGetLolData(setLolMatch) {
