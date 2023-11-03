@@ -16,10 +16,19 @@ export function ValorantButton({ setValorantMatch }) {
 }
 
 
-
+// , {
+//   method: 'POST',
+//   body: JSON.stringify({
+//     region: 'hoenn'
+//   })
 async function onGetData(setValorantMatch){
   // console.log("start")
-  const server_response = await fetch('/.netlify/functions/getValorantApi' )
+  const server_response = await fetch('/.netlify/functions/getMatchsApi' , {
+    method: "POST" , 
+    body: JSON.stringify({
+      game: "valorant"
+    })
+  } )
   //  .then(server_response => server_response.text);
   const theData = await server_response.text();
   console.log(theData.upcoming);

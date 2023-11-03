@@ -18,7 +18,12 @@ export function CsgoButton({setCsgoMatch}) {
 }
 
 async function getMatchNewApiCall(setCsgoMatch){
-  const server_getCsgoCall = (await fetch("/.netlify/functions/getCsgoData"))
+  const server_getCsgoCall = (await fetch("/.netlify/functions/getMatchsApi" , {
+    method: "POST" , 
+    body: JSON.stringify({
+      game: "csgo"
+    })
+  }))
 
   const data = await server_getCsgoCall.text();
   // const data01 = JSON.parse(server_getCall);

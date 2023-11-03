@@ -14,7 +14,12 @@ export function Dota2Button({ setDota2Match }) {
 }
 
 async function getDota2MatchApiCall(setDota2Match){
-  const server_getDota2Call = (await fetch("/.netlify/functions/getDota2Api"))
+  const server_getDota2Call = (await fetch("/.netlify/functions/getMatchsApi" , {
+    method: "POST" , 
+    body: JSON.stringify({
+      game: "dota2"
+    })
+  }))
 
   const data = await server_getDota2Call.text();
   // const data01 = JSON.parse(server_getCall);

@@ -227,13 +227,15 @@ function SingelBat_Open({user_data, userTeam, userTeamName, bat }) {
        
         if(match_day_in_month < curr_day_in_month && bat.winning_team_id === null && lastBatId !== bat.id){
             console.log(lastBatId, " <= last_bat-id : bat_id => ", bat.id)
-            check_the_winner(user_data, userTeam,  winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter)
+            check_Winner(user_data, userTeam,  winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter)
+            // check_the_winner(user_data, userTeam,  winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter)
             setLastBatId(bat.id)
          
         }
         else if(match_day_in_month === curr_day_in_month && match_hour + 6 <= curr_hour && bat.winning_team_id === null && lastBatId !== bat.id ){
             console.log(lastBatId, " <= last_bat-id : bat_id => ", bat.id)
-            check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData ,setWinnerTeam, bat , lastBatId , setCounter , counter)
+            check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData ,setWinnerTeam, bat , lastBatId , setCounter , counter)
+            // check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData ,setWinnerTeam, bat , lastBatId , setCounter , counter)
             setLastBatId(bat.id)
 
         }
@@ -416,6 +418,30 @@ function SingelBat_On({ userTeam, userTeamName, bat }) {
 }
 
 
+async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter){
+   
+        // console.log("start")
+        const server_response = await fetch('/.netlify/functions/checkWinnerApi' , {
+            method: "POST" , 
+            body: JSON.stringify({
+                match_slug: bat.match_slug
+            })
+          })
+        //  .then(server_response => server_response.text);
+        const theData = await server_response.text();
+        console.log(theData.upcoming);
+        const text = JSON.parse(theData)
+        console.log(text.upcoming);
+        // setValorantMatch(text.upcoming)
+
+        if(text.upcoming.data.winner !== null){ 
+            setWinnerTeam(text.upcoming.data.winner.id)  
+            setWinnerTeamData(text.upcoming.data) 
+            winnerUpdate(user_data, userTeam , text.upcoming.data ,bat.tokens ) 
+        }
+} 
+
+
 function check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter) {
   
     let match_result = {};
@@ -428,10 +454,10 @@ function check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData
     // else
     // {
       
-
-    const options = {
-        method: 'GET',
-        url: `https://api.pandascore.co/matches/${bat.match_slug}`,
+//__________________________________________________________________________________________________________________________________________________________
+const options = {
+    method: 'GET',
+    url: `https://api.pandascore.co/matches/${bat.match_slug}`,
         // url: "https://api.pandascore.co/matches/ucam-esports-club-2023-10-25",  //https://api.pandascore.co/matches/ucam-esports-club-2023-10-25
         headers: {
             accept: 'application/json',
@@ -444,26 +470,29 @@ function check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData
         .then(function (response) {
             console.log("response : =>" , "bat_id :" , bat.id, response.data?.winner) ;
             console.log("response : =>" , "bat_id + data:" , bat.id, response.data) ;
-            if(response.data.winner !== null){
-                 setWinnerTeam(response.data.winner.id)
-                 setWinnerTeamData(response.data)
+            if(response.data.winner !== null){    //________________________________
+                 setWinnerTeam(response.data.winner.id)  //________________________________
+                 setWinnerTeamData(response.data)    //________________________________
             match_result = response?.data;
             console.log(" the match slug", bat?.match_slug);
             console.log(" the match get match_result", match_result.winner?.id);
             console.log(" the match get response", response.data.winner?.id);
             console.log(response.data ,"bat_id " , bat.id," _____________________________________________________________");
             console.log( " the match get", response.data.winner?.slug);
-            winnerUpdate(user_data, userTeam , response.data ,bat.tokens )
-            }
-          
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
+            winnerUpdate(user_data, userTeam , response.data ,bat.tokens )  //_________________
+        }
+        
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
 
     // }
-
+    
 }
+//__________________________________________________________________________________________________________________________________________________________
+
+
 
 async function winnerUpdate(user_data , userTeam, winnerTeamData ,wins_tokens ){
     let getTokens = null;

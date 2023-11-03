@@ -18,7 +18,12 @@ export function LolButton({ setLolMatch }) {
 
 async function getLolMatchApiCall(setLolMatch){
   console.log("fetching Data .... >>>")
-  const server_getLolCall = (await fetch("/.netlify/functions/getLola2Api"))
+  const server_getLolCall = (await fetch("/.netlify/functions/getMatchsApi" , {
+    method: "POST" , 
+    body: JSON.stringify({
+      game: "lol"
+    })
+  }))
 
   const data = await server_getLolCall.text();
   // const data01 = JSON.parse(server_getCall);

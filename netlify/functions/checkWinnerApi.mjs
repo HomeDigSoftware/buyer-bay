@@ -1,12 +1,13 @@
 
 export const handler = async (event , context) => {
-    console.log(" the handler event",{event})
-    console.log(" the handler context",{context})
-   const PANDA_API = "https://api.pandascore.co/lol/matches/upcoming"
+    
+    const eventData = JSON.parse(event.body)
+
+   const PANDA_API = `https://api.pandascore.co/matches/${eventData.match_slug}`
    const options = { 
     method : "GET",
-   //  mode : "no-cors",
-   // cache: "no-cache",
+    // mode : "no-cors",
+    cache: "no-cache",
     credential: "same-origin",
     params: {
         sort: 'begin_at',
@@ -14,7 +15,7 @@ export const handler = async (event , context) => {
         per_page: '5',
       },
     headers:{
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
         "Content-Type" : "application/json",
         authorization: 'Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
     },
