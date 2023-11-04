@@ -68,6 +68,45 @@ export default function SupaBaseSingIn() {
     console.log("sending", supaUser.aud)
     getAllMessages();
   }
+
+  async function openUserAccount(supaUser){
+
+    let { data: accounts, error } = await supabase
+    .from('accounts')
+    .select('user_id')
+
+    const aa = "";
+    console.log( "accounts ++====>", accounts)
+  
+    accounts.map((userid) => create_New_User(userid , supaUser)
+    
+    )
+
+  }
+
+  async function create_New_User(userid , supaUser){
+    if(supaUser.id === userid.user_id){
+      console.log("you have an account :) great" , supaUser.user_metadata.name);
+      return
+    }
+    else{
+      const { data, error } = await supabase
+  .from('accounts')
+  .insert([
+    { user_id: supaUser.id, 
+    user_name: supaUser.user_metadata.name ,
+    tokens: 2000 ,
+    email: supaUser.email ,
+   // bating_list: '',
+  },
+  ])
+  .select()
+
+  }
+        
+    
+
+  }
 //_________________________________________________________________________
 useEffect(() => { 
   async function getUserData() {
@@ -84,17 +123,27 @@ useEffect(() => {
     }
       getUserData(); 
       getAllMessages();
+  
 }, [])
 //_________________________________________________________________________
 
 
   supabase.auth.onAuthStateChange(async (event) => {
+    console.log("supabase event ===> " , event)
     if (event === "SINGED_OUT") {
       console.log("user has log out")
     }
-    else {
-      console.log(supaUser.aud)
-      //    getAllMessages();
+
+
+    if(event === "SIGNED_IN"){
+      
+      openUserAccount(supaUser);
+    }
+
+
+    if (event === "INITIAL_SESSION"){
+       console.log(supaUser)
+      
     }
   })
   return (
