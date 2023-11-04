@@ -100,7 +100,7 @@ export default function SupaBaseSingIn() {
           },
         ])
         .select()
-        setsupaUser(the_user)
+        // setsupaUser(the_user)
     }
     else{
       if(the_user.aud === "authenticated"){
@@ -129,23 +129,25 @@ export default function SupaBaseSingIn() {
 //   }
 // }
   //_________________________________________________________________________
-  // useEffect(() => {
-  //   async function getUserData() {
+  useEffect(() => {
+    async function getUserData() {
 
 
-  //     await supabase.auth.getUser().then((value) => {
-  //       if (value.data?.user) {
-  //         console.log(" This is the supauser : ", value.data.user)
-  //         setsupaUser(value.data.user)
-  //         // return
-  //       }
-  //     })
+      await supabase.auth.getUser().then((value) => {
+        if (value.data?.user) {
+          console.log(" This is the supauser : ", value.data.user)
+          setsupaUser(value.data.user)
+          // return
+        }
+      })
 
-  //   }
-  //   getUserData();
-  //   getAllMessages();
+    }
+    getUserData();
+    openUserAccount();
 
-  // }, [])
+    // getAllMessages();
+
+  }, [])
   //_________________________________________________________________________
 
 
@@ -160,7 +162,6 @@ export default function SupaBaseSingIn() {
 
       // setsupaUser(supaUser)
       console.log(" 158 SIGNED_IN ====> ", supaUser.aud, supaUser)
-      openUserAccount();
     }
 
 
