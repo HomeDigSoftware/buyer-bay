@@ -3,13 +3,13 @@ import { useState } from "react";
 import axios from "axios";
 import './App.css'
 import { auth } from "./firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+//import { useAuthState } from "react-firebase-hooks/auth";
 import { GamesButtons } from './component/gamesData/GamesButtons.js';
 import { SiteHeader } from './SiteHeader.js';
 
 
 export default function App_v2() {
-  const [user] = useAuthState(auth);
+ // const [user] = useAuthState(auth);
   const [upcomingData, setUpcomingData] = useState([]);
  
 
@@ -49,9 +49,8 @@ export default function App_v2() {
     <div>
       <SiteHeader />
       {/* <TestingNavbar /> */}
-      <GamesButtons
-        user={user}
-      />
+      <GamesButtons /> 
+      
     </div>
   )
 }

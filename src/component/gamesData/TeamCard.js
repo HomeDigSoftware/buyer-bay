@@ -13,25 +13,10 @@ export default function TeamCard({ data }) {
   const [user , setUser] = useState("");
 
 
-  // useEffect(() => { 
-    async function getUserData() {
-      // const { data: { user } } =
-       await supabase.auth.getUser().then((value) => {
-        if(value.data?.user){
-          setUser(value.data.user);
-          console.log(" This is the supauser : " ,value.data.user)
-        }
-      })
-    }
-    // getUserData();
-  // }, [])
-
- 
-
   return (
     // <div className="main-card" onClick={() => console.log("you picked a match")}>
     <>
-  { showPanel? <div> {haveOpenBats? <div><OpenBats getUserData={getUserData} user={user} matchOpenBats={matchOpenBats} matchData={data} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel}/> </div> : <BattingPanel setShowPanel={setShowPanel} data={data} showPanel={showPanel}/>} </div> : 
+  { showPanel? <div> {haveOpenBats? <div><OpenBats  matchOpenBats={matchOpenBats} matchData={data} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel}/> </div> : <BattingPanel setShowPanel={setShowPanel} data={data} showPanel={showPanel}/>} </div> : 
     //   <div className="main-card" onClick={() => setShowPanel(true)}>
        <div className="main-card" onClick={() => getBats(setShowPanel , data ,setMatchOpenBats, setHaveOpenBats )}> 
        <div className="fifa-matchs flex flex-row">
@@ -121,14 +106,14 @@ function setThePanel(setHaveOpenBats){
   console.log("set the panel")
 }
 
-function OpenBats({getUserData, user, matchOpenBats ,matchData , setHaveOpenBats , setShowPanel}) {
+function OpenBats({matchOpenBats ,matchData , setHaveOpenBats , setShowPanel}) {
  
 
   return (
     <div className='open-batting-background'>
       <div >
         {matchOpenBats.map((bat) => 
-          <OpenBatsCard getUserData={getUserData} user={user} matchOpenBats={bat} matchData={matchData} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel} key={bat.id} />
+          <OpenBatsCard matchOpenBats={bat} matchData={matchData} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel} key={bat.id} />
         
         )}
       </div>
@@ -142,7 +127,7 @@ function OpenBats({getUserData, user, matchOpenBats ,matchData , setHaveOpenBats
 }
 
 
-function OpenBatsCard({getUserData ,user, matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel}){
+function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel}){
   
   // console.log("mtach bats", matchOpenBats , "chosen team " , matchOpenBats.chosen_team_id)
   // console.log("mtach data", matchData , "team [0]" , matchData.opponents[0]?.opponent.id)
@@ -155,7 +140,7 @@ function OpenBatsCard({getUserData ,user, matchOpenBats ,matchData , setHaveOpen
     
       <div className=' team-1  row'>
           <div className='col-4'>
-            <button onClick={() => updateBat_List(getUserData, user ,matchOpenBats ,  setHaveOpenBats ,setShowPanel)  } className='token-btn'>bat on</button>
+            <button onClick={()=>  (updateBat_List( matchOpenBats ,  setHaveOpenBats ,setShowPanel))   } className='token-btn'>bat on</button>
           </div>
 
           <div className=' team-1  col-4'> 
@@ -189,23 +174,29 @@ function OpenBatsCard({getUserData ,user, matchOpenBats ,matchData , setHaveOpen
     )
     }
 
-  async function updateBat_List(getUserData , user ,matchOpenBats,  setHaveOpenBats ,setShowPanel) {
+  async function updateBat_List(   matchOpenBats,  setHaveOpenBats ,setShowPanel) {
+   let user = "";
+   let userTokens = "";
+   
+    
+    await supabase.auth.getUser().then((value) => {
+      console.log(" This is the supauser : " ,value.data.user)
+      if(value.data?.user){
+        user = value.data.user;
+        console.log(" This is the supauser : " ,user)
+      }
+    })
     console.log(" get user => " , user)
-    if(user === "") {
-      getUserData();
-      console.log(" the user => " , user)
-    } 
-   //_______________________________&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&_______________________
-   // let userData = user;
-    let userTokens = "";
-
+    
+    
     let {data, error } = await supabase
-      .from("accounts")
-      .select("tokens")
-      .eq('user_id', user.id)
-
-      userTokens = data[0];
-      console.log(" user :" , user )
+    .from("accounts")
+    .select("tokens")
+    .eq('user_id', user.id)
+    
+    userTokens = data[0];
+    console.log(" user  : => " , user )
+    console.log(" get tokens => " , userTokens)
       postBat(userTokens , matchOpenBats , user ,setHaveOpenBats ,setShowPanel);
       
   }
