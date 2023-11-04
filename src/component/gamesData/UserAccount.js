@@ -45,10 +45,11 @@ export default function UserAccount() {
         // //   .eq("user_id" , user.id)
 
         //   console.log(" COMBINE => ",bat_list_combine)
-        //   // console.log(" COMBINE => ",bat_list_combine.map((bat) => (bat.id, bat.match_ok)))
+         //console.log(" => ",bat_list_combine.map((bat) => (bat.id, bat.match_ok)))
         // setCombine(bat_list_combine);
 
 //_________________________________________________________________________________________________
+        console.log(" my-bat =>  ")
         setUser_data(user)
         setShowAccount(true)
        
@@ -196,7 +197,7 @@ function SingelBat_Open({user_data, userTeam, userTeamName, bat }) {
 
     console.log(bat_steel_good, " <= GOOD : if bat is accpted ", bat.match_slug);
     console.log("the match_OK : " ,bat.match_ok , match_month , curr_month);
-    console.log("NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW CALLLLL");
+    console.log("NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW CALLLLL lastBatId != bat.id :" , (lastBatId != bat.id));
 
 
 
@@ -223,27 +224,32 @@ function SingelBat_Open({user_data, userTeam, userTeamName, bat }) {
     if (bat.match_ok === "true" && lastBatId != bat.id ) { 
         bat_steel_good = "true";
         console.log(bat.id ,"<= bat_id  (can check at => )", (match_hour) + 6, " match hour => ", match_hour , " : ", "curr hour =>", curr_hour)
+        console.log( match_day_in_month ," <= match_day_in_month : curr_day_in_month => " ,curr_day_in_month )
         console.log("winning team id", bat.winning_team_id);
+        console.log("match_day_in_month < curr_day_in_month ", (match_day_in_month < curr_day_in_month));
+        console.log("bat.winning_team_id === null " , bat.winning_team_id === null)
+        console.log(" lastBatId !== bat.id ", ( lastBatId !== bat.id));
        
        
-        if(match_day_in_month < curr_day_in_month && bat.winning_team_id === null && lastBatId !== bat.id){
-            console.log(lastBatId, " <= last_bat-id : bat_id => ", bat.id)
+        if(match_day_in_month < curr_day_in_month && bat.winning_team_id === null && lastBatId !== bat.id ||
+            match_day_in_month >= curr_day_in_month && bat.winning_team_id === null && lastBatId !== bat.id && curr_month > match_month){
+            console.log(lastBatId, "check_Winner <= last_bat-id : bat_id => ", bat.id)
             check_Winner(user_data, userTeam,  winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter)
             // check_the_winner(user_data, userTeam,  winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter)
             setLastBatId(bat.id)
          
         }
         else if(match_day_in_month === curr_day_in_month && match_hour + 6 <= curr_hour && bat.winning_team_id === null && lastBatId !== bat.id ){
-            console.log(lastBatId, " <= last_bat-id : bat_id => ", bat.id)
+            console.log(lastBatId, "check_Winner <= last_bat-id : bat_id => ", bat.id)
             check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData ,setWinnerTeam, bat , lastBatId , setCounter , counter)
             // check_the_winner(user_data, userTeam, winnerTeamData, setWinnerTeamData ,setWinnerTeam, bat , lastBatId , setCounter , counter)
             setLastBatId(bat.id)
 
         }
-       else if (bat.winning_team_id !== null && winnerTeam === null) {
+        else if (bat.winning_team_id !== null && winnerTeam === null) {
         bat_steel_good = "true";
         setWinnerTeam(bat.winning_team_id)
-        console.log(" winning team id from data base", winnerTeam , "<==>", bat.winning_team_id)
+        console.log("not invoke check_Winner winning team id from data base", winnerTeam , "<==>", bat.winning_team_id)
        }
         // if ((match_hour ) + 6 < curr_hour && bat.winning_team_id === null && match_day_in_month <= curr_day_in_month) {
         //     console.log(" match started at : ", match_hour, "can check the result 6 houres has passet after ")
@@ -307,7 +313,7 @@ function SingelBat_Open({user_data, userTeam, userTeamName, bat }) {
                     bat_steel_good = "true"
                 }
                 
-               else if(match_day_in_month > curr_day_in_month){
+               else if(match_day_in_month > curr_day_in_month && match_month >= curr_month){
                     console.log("INNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN ", bat.id)
                     console.log(" match_month :", match_month)
                     console.log(" curr_month :", curr_month)
@@ -421,25 +427,32 @@ function SingelBat_On({ userTeam, userTeamName, bat }) {
 
 async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter){
    
-        console.log("start")
-        const server_response = await fetch('/.netlify/functions/checkWinnerApi' , {
-            method: "POST" , 
-            body: JSON.stringify({
-                match_slug: bat.match_slug
-            })
-          })
-        //  .then(server_response => server_response.text);
-        const theData = await server_response.text();
-        console.log(" new API call test", theData.upcoming);
-        const text = JSON.parse(theData)
-        console.log(text.upcoming);
+    console.log("AAAAAAAAAAAAAa start lastBatId === bat.id")
         // setValorantMatch(text.upcoming)
-
-        if(text.upcoming.data.winner !== null){ 
-            setWinnerTeam(text.upcoming.data.winner.id)  
-            setWinnerTeamData(text.upcoming.data) 
-            winnerUpdate(user_data, userTeam , text.upcoming.data ,bat.tokens ) 
+        if(lastBatId === bat.id){
+             return
         }
+        else{
+            console.log("start")
+            const server_response = await fetch('/.netlify/functions/checkWinnerApi' , {
+                method: "POST" , 
+                body: JSON.stringify({
+                    match_slug: bat.match_slug
+                })
+              })
+            //  .then(server_response => server_response.text);
+            const theData = await server_response.text();
+            const text = JSON.parse(theData)
+            console.log(" new API call test", text.upcoming.slug);
+            console.log(" the Winner : ", text.upcoming.winner?.name);
+            if(text.upcoming.winner !== null){ 
+               setWinnerTeam(text.upcoming.winner.id)  
+                setWinnerTeamData(text.upcoming.winner) 
+                winnerUpdate(user_data, userTeam , text.upcoming.winner ,bat.tokens ) 
+             }
+        }
+
+       
 } 
 
 
