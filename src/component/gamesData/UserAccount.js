@@ -427,7 +427,7 @@ function SingelBat_On({ userTeam, userTeamName, bat }) {
 
 async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamData , setWinnerTeam, bat , lastBatId , setCounter , counter){
    
-    console.log("AAAAAAAAAAAAAa start lastBatId === bat.id")
+    console.log("AAAAAAAAAAAAAa start lastBatId === bat.id" , bat)
         // setValorantMatch(text.upcoming)
         if(lastBatId === bat.id){
              return
@@ -448,7 +448,7 @@ async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamDa
             if(text.upcoming.winner !== null){ 
                setWinnerTeam(text.upcoming.winner.id)  
                 setWinnerTeamData(text.upcoming.winner) 
-                winnerUpdate(user_data, userTeam , text.upcoming.winner ,bat.tokens ) 
+                winnerUpdate(bat ,user_data, userTeam , text.upcoming.winner ,bat.tokens ) 
              }
         }
 
@@ -508,14 +508,18 @@ async function check_Winner(user_data, userTeam, winnerTeamData, setWinnerTeamDa
 
 
 
-async function winnerUpdate(user_data , userTeam, winnerTeamData ,wins_tokens ){
+async function winnerUpdate(bat ,user_data , userTeam, winnerTeamData ,wins_tokens ){
+    console.log("user_data" , user_data)
+    console.log("userTeam" , userTeam)
+    console.log("winnerTeamData" , winnerTeamData)
+    console.log("wins_tokens" , wins_tokens)
     let getTokens = null;
    
-  console.log("from the update " , winnerTeamData?.id , winnerTeamData.winner?.id)
+  console.log("from the update " , winnerTeamData , winnerTeamData?.id)
     const { w_data, update_error } = await supabase
         .from('bat_list')
-        .update({ winning_team_id: winnerTeamData.winner?.id  })
-        .eq("match_id" ,winnerTeamData?.id )
+        .update({ winning_team_id: winnerTeamData?.id  })
+        .eq("match_id" ,bat.match_id )
         .select()
 
         // update the tokens 
@@ -530,7 +534,7 @@ async function winnerUpdate(user_data , userTeam, winnerTeamData ,wins_tokens ){
         })
         console.log("user tokens :" , u_tokens)
         
-        if(userTeam === winnerTeamData.winner?.id){
+        if(userTeam === winnerTeamData?.id){
             const {up_data : updata_tokens , up_error} = await supabase
             .from('accounts')
             .update({tokens: getTokens + (wins_tokens)})
