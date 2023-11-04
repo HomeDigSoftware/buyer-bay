@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import supabase from "../../services/supabase.js";
 import '../../App.css'
 
@@ -30,12 +30,12 @@ export default function SupaBaseSingIn() {
     setClick(false);
   }
 
-  
+
   const getAllMessages = async () => {
-      if(supaUser.aud === "authenticated"){
+    if (supaUser.aud === "authenticated") {
       let { data: messages, error } = await supabase
-      .from('messages')
-      .select('*')
+        .from('messages')
+        .select('*')
       messages.map((data) => {
         console.log(data);
       })
@@ -64,96 +64,113 @@ export default function SupaBaseSingIn() {
         }
       ])
       .select()
-      setNewDbMessage("");
+    setNewDbMessage("");
     console.log("sending", supaUser.aud)
     getAllMessages();
   }
 
-  async function openUserAccount(supaUser){
+  async function openUserAccount() {
+    let the_user = {}
+    await supabase.auth.getUser().then((value) => {
+      if (value.data?.user) {
+        console.log(" This is the supauser : ", value.data.user)
+        // setsupaUser(value.data.user)
+        the_user = value.data.user;
+        // return
+      }
+    })
 
     let { data: accounts, error } = await supabase
-    .from('accounts')
-    .select('user_id')
+      .from('accounts')
+      .select('user_id')
 
-    const aa = "";
-    console.log( "accounts ++====>", accounts)
-  
-    accounts.map((userid) => create_New_User(userid , supaUser)
-    
+    console.log("accounts ++====>", accounts, "=========> ", the_user)
+
+    accounts.map((userid) => create_New_User(userid, the_user)
+
     )
 
   }
 
-  async function create_New_User(userid , supaUser){
-    if(supaUser.id === userid.user_id){
-      console.log("you have an account :) great" , supaUser.user_metadata.name);
+  async function create_New_User(userid, the_user) {
+    console.log("create_New_User ==> ", userid.user_id)
+    console.log("create_New_User ==> ", the_user?.id)
+    if (the_user.id === userid.user_id) {
+      console.log("you have an account :) great", the_user.user_metadata);
       return
     }
-    else{
-      const { data, error } = await supabase
-  .from('accounts')
-  .insert([
-    { user_id: supaUser.id, 
-    user_name: supaUser.user_metadata.name ,
-    tokens: 2000 ,
-    email: supaUser.email ,
-   // bating_list: '',
-  },
-  ])
-  .select()
+
+
+    if (the_user.id !== userid.user_id) {
+      console.log("Create account : ")
+      console.log(the_user.id, " <== the_user_id  : userid.user_id ==> ", userid.user_id)
+      // const { data, error } = await supabase
+      //   .from('accounts')
+      //   .insert([
+      //     {
+      //       user_id: the_user.id,
+      //       user_name: the_user.user_metadata.name,
+      //       tokens: 2000,
+      //       email: the_user.email,
+      //       // bating_list: '',
+      //     },
+      //   ])
+      //   .select()
+
+    }
+
+
+
 
   }
-        
-    
-
-  }
-//_________________________________________________________________________
-useEffect(() => { 
-  async function getUserData() {
+  //_________________________________________________________________________
+  useEffect(() => {
+    async function getUserData() {
 
 
       await supabase.auth.getUser().then((value) => {
         if (value.data?.user) {
-          console.log(" This is the supauser : " ,value.data.user)
+          console.log(" This is the supauser : ", value.data.user)
           setsupaUser(value.data.user)
           // return
         }
       })
-    
+
     }
-      getUserData(); 
-      getAllMessages();
-  
-}, [])
-//_________________________________________________________________________
+    getUserData();
+    getAllMessages();
+
+  }, [])
+  //_________________________________________________________________________
 
 
   supabase.auth.onAuthStateChange(async (event) => {
-    console.log("supabase event ===> " , event)
+    console.log("supabase event ===> ", event)
     if (event === "SINGED_OUT") {
       console.log("user has log out")
     }
 
 
-    if(event === "SIGNED_IN"){
-      
-      openUserAccount(supaUser);
+    if (event === "SIGNED_IN") {
+
+      console.log("SIGNED_IN ====> ", supaUser.aud, supaUser)
+      openUserAccount();
     }
 
 
-    if (event === "INITIAL_SESSION"){
-       console.log(supaUser)
-      
+    if (event === "INITIAL_SESSION") {
+      console.log(supaUser)
+
     }
   })
   return (
     <div>
       <div>
-      {supaUser.aud === "authenticated" ? <h5> {supaUser.aud}</h5> : <h4> Not authenticated</h4>}
+        {supaUser.aud === "authenticated" ? <h5> {supaUser.aud}</h5> : <h4> Not authenticated</h4>}
       </div>
-     {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : <div> <LoginButton onSingin={HandleSingIn} />
-       </div>}
-      <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click}  />
+      {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : <div> <LoginButton onSingin={HandleSingIn} />
+      </div>}
+      <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click} />
       <form onSubmit={(e) => handleSendMessage(e)} className="send-message">
         <label htmlFor="messageInput" hidden>
           Supabase Enter Message
@@ -179,7 +196,7 @@ function GetDBMessages({ onGetMessagees, dbMessage, supaUser, click }) {
 
   return (
     <div>
-      <button style={{backgroundColor: "gray"}} onClick={onGetMessagees}>
+      <button style={{ backgroundColor: "gray" }} onClick={onGetMessagees}>
         get old messagees
       </button>
       <div>
@@ -216,11 +233,11 @@ function LoginButton({ onSingin }) {
 
 
 
-function ChatMessages({ dbMessagedata, supaUser  }) {
+function ChatMessages({ dbMessagedata, supaUser }) {
   // const scroll = useRef();
   return (
     <div>
-      <div> 
+      <div>
       </div>
       <div>
         <div>
@@ -233,7 +250,7 @@ function ChatMessages({ dbMessagedata, supaUser  }) {
             <div className="chat-bubble__right">
               <p className="user-name">{dbMessagedata?.name}</p>
               <p className="user-message">{dbMessagedata?.message}
-              
+
               </p>
             </div>
           </div>
