@@ -76,71 +76,76 @@ export default function SupaBaseSingIn() {
         console.log(" This is the supauser : ", value.data.user)
         // setsupaUser(value.data.user)
         the_user = value.data.user;
+        // setsupaUser(the_user)
         // return
       }
     })
+    const { data, error } = await supabase
+    .from('accounts')
+    .select('user_id')
+    .eq('user_id', the_user.id) 
+    console.log("NEW API CALL ====> " ,data)
+   
+    if(data.length === 0){
+      console.log("its going throug" ,the_user );
+       const { data, error } = await supabase
+        .from('accounts')
+        .insert([
+          {
+            user_id: the_user.id,
+            user_name: the_user.user_metadata.name,
+            tokens: 2000,
+            email: the_user.email,
+            // bating_list: '',
+          },
+        ])
+        .select()
+        setsupaUser(the_user)
+    }
+    else{
+      if(the_user.aud === "authenticated"){
+        setsupaUser(the_user)
+      }
+      console.log("you have an account :) great", the_user.user_metadata.name);
+    }
+    // let { data: accounts, error } = await supabase
+    //   .from('accounts')
+    //   .select('user_id')
 
-    let { data: accounts, error } = await supabase
-      .from('accounts')
-      .select('user_id')
+    // console.log("accounts ++====>", accounts, "=========> ", the_user)
 
-    console.log("accounts ++====>", accounts, "=========> ", the_user)
-
-    accounts.map((userid) => create_New_User(userid, the_user)
-
-    )
+    // accounts.map((userid) => create_New_User(userid, the_user) )
 
   }
 
-  async function create_New_User(userid, the_user) {
-    console.log("create_New_User ==> ", userid.user_id)
-    console.log("create_New_User ==> ", the_user?.id)
-    if (the_user.id === userid.user_id) {
-      console.log("you have an account :) great", the_user.user_metadata);
-      return
-    }
+//   async function create_New_User(userid, the_user) {
+//     console.log("create_New_User ==> ", userid.user_id)
+//     console.log("create_New_User ==> ", the_user?.id)
 
+//     if (the_user.id !== userid.user_id) {
+//       console.log("Create account : ")
+//       console.log(the_user.id, " <== the_user_id  : userid.user_id ==> ", userid.user_id)
 
-    if (the_user.id !== userid.user_id) {
-      console.log("Create account : ")
-      console.log(the_user.id, " <== the_user_id  : userid.user_id ==> ", userid.user_id)
-      // const { data, error } = await supabase
-      //   .from('accounts')
-      //   .insert([
-      //     {
-      //       user_id: the_user.id,
-      //       user_name: the_user.user_metadata.name,
-      //       tokens: 2000,
-      //       email: the_user.email,
-      //       // bating_list: '',
-      //     },
-      //   ])
-      //   .select()
-
-    }
-
-
-
-
-  }
+//   }
+// }
   //_________________________________________________________________________
-  useEffect(() => {
-    async function getUserData() {
+  // useEffect(() => {
+  //   async function getUserData() {
 
 
-      await supabase.auth.getUser().then((value) => {
-        if (value.data?.user) {
-          console.log(" This is the supauser : ", value.data.user)
-          setsupaUser(value.data.user)
-          // return
-        }
-      })
+  //     await supabase.auth.getUser().then((value) => {
+  //       if (value.data?.user) {
+  //         console.log(" This is the supauser : ", value.data.user)
+  //         setsupaUser(value.data.user)
+  //         // return
+  //       }
+  //     })
 
-    }
-    getUserData();
-    getAllMessages();
+  //   }
+  //   getUserData();
+  //   getAllMessages();
 
-  }, [])
+  // }, [])
   //_________________________________________________________________________
 
 
@@ -153,13 +158,14 @@ export default function SupaBaseSingIn() {
 
     if (event === "SIGNED_IN") {
 
-      console.log("SIGNED_IN ====> ", supaUser.aud, supaUser)
+      // setsupaUser(supaUser)
+      console.log(" 158 SIGNED_IN ====> ", supaUser.aud, supaUser)
       openUserAccount();
     }
 
 
     if (event === "INITIAL_SESSION") {
-      console.log(supaUser)
+      console.log("INITIAL_SESSION")
 
     }
   })
