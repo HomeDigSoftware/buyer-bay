@@ -128,19 +128,23 @@ function OpenBats({matchOpenBats ,matchData , setHaveOpenBats , setShowPanel}) {
 
 
 function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel}){
+   const [localUser , setLocalUser] = useState("");
   
-  // console.log("mtach bats", matchOpenBats , "chosen team " , matchOpenBats.chosen_team_id)
-  // console.log("mtach data", matchData , "team [0]" , matchData.opponents[0]?.opponent.id)
+  console.log("local user =======>>>>>> " , localUser)
   let team_image = "";
-  if( matchOpenBats.match_ok === "false" && matchOpenBats.match_id === matchData.id){
-   //  team_image = matchData.opponents[0].opponent.image_url
+  console.log("matchOpenBats.match_ok === false && matchOpenBats.match_id === matchData.id")
+  console.log("matchOpenBats.match_ok ==> ", matchOpenBats.match_ok)
+  console.log(matchOpenBats.match_id , " <= matchOpenBats.match_id === matchData.id => ", matchData.id)
+    
+  if( matchOpenBats.match_ok === "false" && matchOpenBats.match_id === matchData.id ){
+  
      console.log("AAAAAAA")
-//className='open-batting-background mt-10 ' style={{position:"fixed" , backgroundColor:"gray"}}   style={{position:"absolute" , backgroundColor:"gray"}}
+
      return(
     
       <div className=' team-1  row'>
           <div className='col-4'>
-            <button onClick={()=>  (updateBat_List( matchOpenBats ,  setHaveOpenBats ,setShowPanel))   } className='token-btn'>bat on</button>
+            <button onClick={()=>  updateBat_List( matchOpenBats ,  setHaveOpenBats ,setShowPanel) } className='token-btn'>bat on</button>
           </div>
 
           <div className=' team-1  col-4'> 
@@ -173,20 +177,25 @@ function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel
 
     )
     }
+   
 
   async function updateBat_List(   matchOpenBats,  setHaveOpenBats ,setShowPanel) {
-   let user = "";
+   
+       console.log('__________updateBat_List _______')
+       console.log('matchOpenBats' ,matchOpenBats)
+   
+    let user = "";
    let userTokens = "";
    
     
     await supabase.auth.getUser().then((value) => {
-      console.log(" This is the supauser : " ,value.data.user)
+     
       if(value.data?.user){
         user = value.data.user;
         console.log(" This is the supauser : " ,user)
       }
     })
-    console.log(" get user => " , user)
+  
     
     
     let {data, error } = await supabase
@@ -195,44 +204,55 @@ function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel
     .eq('user_id', user.id)
     
     userTokens = data[0];
-    console.log(" user  : => " , user )
     console.log(" get tokens => " , userTokens)
       postBat(userTokens , matchOpenBats , user ,setHaveOpenBats ,setShowPanel);
       
   }
 
   function postBat(userTokens , matchOpenBats ,user ,setHaveOpenBats ,setShowPanel){
-    console.log(" user :" , user )
+   console.log('__________postBat _______')
+   console.log('userTokens' ,userTokens)
+   console.log('matchOpenBats' , matchOpenBats)
+   console.log('user' ,user)
+  
+
     theBat(userTokens , matchOpenBats , user ,setHaveOpenBats ,setShowPanel)
   }
 
   async function theBat(userTokens , matchOpenBats , user ,setHaveOpenBats , setShowPanel){ 
-    //  getMatch(videoGame, leagueId, matchSlug);
-    console.log(' user data' ,userTokens.tokens , matchOpenBats.tokens)
-    if (userTokens.tokens >= matchOpenBats.tokens) {
-      // checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens);
-      // let user_bating_list = '';
-      setHaveOpenBats(false)
-      setShowPanel(false)
-      const { data, update_error } = await supabase
-        .from('bat_list')
-        .update({ match_ok: "true" })
-        .eq("id", matchOpenBats.id) // bat_id
-        .select()
+ 
+   console.log('__________the bat _______')
+   console.log('userTokens' ,userTokens)
+   console.log('matchOpenBats' , matchOpenBats)
+ 
+   console.log('user' ,user.id)
 
-      const { data_01, update_01 } = await supabase
-        .from("bat_list")
+
+    console.log(' user data' ,userTokens.tokens , matchOpenBats.tokens)
+   if(user.id !== matchOpenBats.user_id ){
+    if (userTokens.tokens >= matchOpenBats.tokens) {
+   
+      const { error } = await supabase
+      .from('bat_list')
+      .update({ match_ok: "true" })
+      .eq("id", matchOpenBats.id) // bat_id
+      .select()
+      
+      const { error02 } = await supabase
+      .from("bat_list")
         .update({ opp_user_id: user.id })
         .eq("id", matchOpenBats.id) //bat_id
         .select()
 
-      const { data_02, update_02 } = await supabase
+      const { error03 } = await supabase
         .from("bat_list")
         .update({ opp_email: user.user_metadata.email })
         .eq("id", matchOpenBats.id) //bat_id
         .select()
-
-      console.log("from Quick Matching", matchOpenBats.id, update_error, data)
+        
+        setHaveOpenBats(false)
+        setShowPanel(false)
+      console.log("from Quick Matching", matchOpenBats.id,)
     
     }
     else {
@@ -240,7 +260,11 @@ function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel
       return
     }
 
+  }else{
+    console.log("you open the bat :) cant bat on it ")
   }
+   }
+   
 
 }
 

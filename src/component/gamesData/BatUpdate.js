@@ -11,7 +11,7 @@ export default function BatUpdate() {
   return (
     <>
       <div>
-        User Account  
+        {/* User Account   */}
       
        </div>
        

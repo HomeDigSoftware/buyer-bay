@@ -86,7 +86,7 @@ export default function SupaBaseSingIn() {
     .eq('user_id', the_user.id) 
     console.log("NEW API CALL ====> " ,data)
    
-    if(data.length === 0){
+    if(data.length === 0 && the_user.length > 0){
       console.log("its going throug" ,the_user );
        const { data, error } = await supabase
         .from('accounts')
@@ -106,7 +106,7 @@ export default function SupaBaseSingIn() {
       if(the_user.aud === "authenticated"){
         setsupaUser(the_user)
       }
-      console.log("you have an account :) great", the_user.user_metadata.name);
+      console.log("you have an account :) great", );//the_user.user_metadata.name
     }
     // let { data: accounts, error } = await supabase
     //   .from('accounts')

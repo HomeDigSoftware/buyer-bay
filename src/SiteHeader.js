@@ -15,24 +15,36 @@ export function SiteHeader() {
       async function getUserData() {
         await supabase.auth.getUser().then((value) => {
           if (value.data?.user) {
-            console.log(" This is the supauser : " ,value.data.user.aud)
+            console.log(" This is the supauser : " ,value.data.user)
             setUser(value.data.user.aud)
             // return
-            getTokens(user);
+            getTokensDB(value.data.user , setUserTokens);
           }
         })
       }
       getUserData();
+    
     }, [])
+
+    
+  async function getTokensDB(user , setUserTokens) {
+    const { data, error } = await supabase
+    .from('accounts')
+    .select('tokens')
+    .eq('user_id', user.id)    // Correct
+    console.log("the _____from SITE HEADER __________data :: " , data[0].tokens)
+    setUserTokens(data[0].tokens)
+  }
 
   return (
 
     <header className="border-bottom lh-1 py-3">
       <div className="main-header row flex-nowrap justify-content-between align-items-center text-center">
-        <div className="col-3 pt-1">
-           <ShowUserTokens userToken={userTokens}/>
+        <div className="col-3 pt-1 flex flex-row">
+          
             <AddTokens userTokens={userTokens} setUserTokens={setUserTokens}/>
             <BatUpdate />
+          <div className='tokens-header m-auto' style={{fontSize:"18px", fontWeight:"800" , }}> You Have {"\n"} {userTokens}TK</div>
         </div>
         <div className="logo-cont col-6 text-center">
          
