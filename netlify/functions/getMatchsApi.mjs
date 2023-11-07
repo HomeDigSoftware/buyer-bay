@@ -3,13 +3,13 @@ export const handler = async (event , context) => {
     console.log(" the handler event",{event})
     console.log(" the handler context",{context})
     const eventData = JSON.parse(event.body)
-   const PANDA_API = `https://api.pandascore.co/${eventData.game}/matches/upcoming/sort=begin_at&page=1&per_page=5`
+   const PANDA_API = `https://api.pandascore.co/${eventData.game}/matches/upcoming`
    const options = { 
     method : "GET",
     // mode : "no-cors",
     cache: "no-cache",
     credential: "same-origin",
-    params: {
+    params:{
         sort: 'begin_at',
         page: '1',
         per_page: '5'
