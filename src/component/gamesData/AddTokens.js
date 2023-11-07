@@ -22,7 +22,6 @@ export default function AddTokens({userTokens , setUserTokens}) {
 
     return (
         <div>
-
             <button className="token-btn m-4 btn btn-secondary"
                 // onClick={() => checkTokens({ openMenu, setOpenMenu, setShow })}
                 onClick={() => openTokenMenu(setShow, setUserTokens, setMessage)}

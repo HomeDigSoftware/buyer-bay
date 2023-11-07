@@ -31,7 +31,7 @@ async function onGetData(setValorantMatch){
   } )
   //  .then(server_response => server_response.text);
   const theData = await server_response.text();
-  console.log(theData.upcoming);
+  console.log("the data ========== " , theData.upcoming);
   const text = JSON.parse(theData)
   console.log(text.upcoming);
   setValorantMatch(text.upcoming)
@@ -52,21 +52,22 @@ async function onGetData(setValorantMatch){
 
 //___________________________________________________________________________________________
 function handleGetValorant(setValorantMatch) {
-  const pandaToken = "zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0"
-  const url = `https://api.pandascore.co/valorant/matches/upcoming?token=${pandaToken}`;
-  const options = {
-    method: 'GET',
-    url: `https://api.pandascore.co/valorant/matches/upcoming?token=${pandaToken}`,
-    params: {
-      sort: 'begin_at',
-      page: '1',
-      per_page: '5'
-    },
-    headers: {
-      accept: "application/json",
-      authorization:
-        "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
-    },
+  // const pandaToken = "zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0"
+  // const url = `https://api.pandascore.co/valorant/matches/upcoming?token=${pandaToken}`;
+  // const options = {
+  //   method: 'GET',
+  //   url: `https://api.pandascore.co/valorant/matches/upcoming?token=${pandaToken}`,
+   
+  //   headers: {
+  //     accept: "application/json",
+  //     authorization:
+  //       "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
+  //   },
+  //   params: {
+  //     sort: 'begin_at',
+  //     page: '1',
+  //     per_page: '5'
+  //   },
     // headers: {
     //  'https://api.pandascore.co/videogames?token=PLACEHOLDER_TOKEN_VALUE' \
       // accept: 'application/json',
@@ -83,7 +84,7 @@ function handleGetValorant(setValorantMatch) {
 //     "Authorization": "Bearer sdswmaiqwasae*********",
 //     "Content-Type": "application/json"
 //   }
-}
+//}
     //__________________________________________________________________________________________________
 // fetch(url, myoptions)
 //   .then( res => res.json() )
@@ -91,15 +92,15 @@ function handleGetValorant(setValorantMatch) {
 //      }
 //   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      setValorantMatch(response.data)
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     setValorantMatch(response.data)
+  //     console.log(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error);
+  //   });
 }
 
 
