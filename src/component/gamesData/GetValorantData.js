@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TeamCard from './TeamCard.js';
 import axios from 'axios';
 
@@ -106,12 +106,21 @@ function handleGetValorant(setValorantMatch) {
 
 
 export function ValorantGetMatch({ valorantMatch }) {
+  const [list , setList] = useState({});
+  const the_data = "";
+  const date = new Date();
+  const curr_day = date.getDate(date);
+  const curr_hour = date.getHours(date);
+  const curr_minute = date.getMinutes(date)
+  //valorantMatch.map((data) =>             {if(data.begin_at.slice(11 ,13) >= curr_hour && data.begin_at.slice(8 ,10) >= curr_day)
+  //console.log(" current hour && minute " , data.begin_at.slice(11, 13), curr_hour , data.begin_at.slice(14, 16), curr_minute)
   return (
     <div className='valor-card'>
       <div className=" clear-both text-center iteam-align-center justify-center ">
-        {valorantMatch.map((data) => (
-          <TeamCard data={data} key={data.id} />
-        ))}
+         
+         
+         {valorantMatch.map((data) =>  (<TeamCard data={data} key={data.id} />))}
+     
       </div>
     </div>
   );

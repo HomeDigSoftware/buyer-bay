@@ -84,9 +84,9 @@ export default function SupaBaseSingIn() {
     .from('accounts')
     .select('user_id')
     .eq('user_id', the_user.id) 
-    console.log("NEW API CALL ====> " ,data)
+    console.log("NEW API CALL ====> " , data ,data.length ,"<= data.length: the_user.length => ", the_user , the_user.email)
    
-    if(data.length === 0 && the_user.length > 0){
+    if(data.length === 0 && the_user.aud === "authenticated"){
       console.log("its going throug" ,the_user );
        const { data, error } = await supabase
         .from('accounts')
@@ -142,6 +142,7 @@ export default function SupaBaseSingIn() {
       })
 
     }
+    console.log("use effect")
     getUserData();
     openUserAccount();
 

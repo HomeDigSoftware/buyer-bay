@@ -18,7 +18,8 @@ export default function TeamCard({ data }) {
     <>
   { showPanel? <div> {haveOpenBats? <div><OpenBats  matchOpenBats={matchOpenBats} matchData={data} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel}/> </div> : <BattingPanel setShowPanel={setShowPanel} data={data} showPanel={showPanel}/>} </div> : 
     //   <div className="main-card" onClick={() => setShowPanel(true)}>
-       <div className="main-card" onClick={() => getBats(setShowPanel , data ,setMatchOpenBats, setHaveOpenBats )}> 
+      
+      <div className="main-card" onClick={() => getBats(setShowPanel , data ,setMatchOpenBats, setHaveOpenBats )}> 
        <div className="fifa-matchs flex flex-row">
         <div className="teams-card flex flex-row gap-6  m-auto">
           <div className="team-1 text-center">

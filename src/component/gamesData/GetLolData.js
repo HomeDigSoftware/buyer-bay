@@ -63,6 +63,7 @@ async function getLolMatchApiCall(setLolMatch){
 export function LolGetMatch({ lolMatch }) {
   return (
     <div>
+      {console.log("LOL_______CARD ")}
       <div>
         {lolMatch.map((data) => (
           <TeamCard data={data} key={data.id} />

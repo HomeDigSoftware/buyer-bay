@@ -32,8 +32,8 @@ export function SiteHeader() {
     .from('accounts')
     .select('tokens')
     .eq('user_id', user.id)    // Correct
-    console.log("the _____from SITE HEADER __________data :: " , data[0].tokens)
-    setUserTokens(data[0].tokens)
+    console.log("the _____from SITE HEADER __________data :: " , data[0]?.tokens)
+    setUserTokens(data[0]?.tokens)
   }
 
   return (
