@@ -351,7 +351,7 @@ body,
   ); 
 }
 
-.account-panel{
+.account-panel , .all-bats-panel{
   font-size: 18px;
   font-weight: 800;
   position: fixed;

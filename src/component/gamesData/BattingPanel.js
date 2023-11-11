@@ -11,8 +11,10 @@ export default function BattingPanel({ setShowPanel, data, showPanel }) {
     const [glow_Team2, setGlow_Team2] = useState("w-20 h-20 m-auto ");
     const [chosenTeam, setChosenTeam] = useState("");
     const [chosenTeamName, setChosenTeamName] = useState("");
+    const [chosenTeamImage, setChosenTeamImage] = useState("");
     const [oppTeam, setOppTeam] = useState('');
     const [oppTeamName, setOppTeamName] = useState('');
+    const [oppTeamImage, setOppTeamImage] = useState('');
     const [battingUser, setBattingUser] = useState("");
     const [begin_at, setBegin_at] = useState(data.begin_at);
     const [team_01_ID, setTeam_01_ID] = useState(data.opponents[0].opponent.id)
@@ -70,10 +72,13 @@ export default function BattingPanel({ setShowPanel, data, showPanel }) {
                                         team_02_Name,
                                         setChosenTeam,
                                         setChosenTeamName,
+                                        setChosenTeamImage,
                                         setGlow_Team1,
                                         setGlow_Team2,
                                         setOppTeam,
                                         setOppTeamName,
+                                        setOppTeamImage,
+                                        data,
                                         "team_1",
                                     )
                                 }
@@ -103,10 +108,13 @@ export default function BattingPanel({ setShowPanel, data, showPanel }) {
                                         team_02_Name,
                                         setChosenTeam,
                                         setChosenTeamName,
+                                        setChosenTeamImage,
                                         setGlow_Team1,
                                         setGlow_Team2,
                                         setOppTeam,
                                         setOppTeamName,
+                                        setOppTeamImage,
+                                        data,
                                         "team_2",
                                     )
                                 }
@@ -185,7 +193,7 @@ export default function BattingPanel({ setShowPanel, data, showPanel }) {
 
                         <button
                             onClick={() =>
-                               ( sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, begin_at, matchID, leagueId, tournament_Id, videoGame)    
+                               ( sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, begin_at, matchID, leagueId, tournament_Id, videoGame ,data)    
                            , closePanel(setShowPanel)) }
                             className="token-btn send gap-10"
                         >
@@ -237,7 +245,7 @@ export default function BattingPanel({ setShowPanel, data, showPanel }) {
 
 // }
 
-async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, begin_at, matchID, leagueId, tournament_Id, videoGame) {
+async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, begin_at, matchID, leagueId, tournament_Id, videoGame , match_data) {
     // const [updateTokens , setupdateTokens] = useState("");
     // const { data: { user } } = await supabase.auth.getUser()
 
@@ -252,7 +260,7 @@ async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamNam
     updateTokens = data[0].tokens
     //  getMatch(videoGame, leagueId, matchSlug);
     if (data[0].tokens >= amount) {
-        checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens);
+        checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data);
     }
     else {
         console.log("you dont have enoufe money ", data[0].tokens)
@@ -284,7 +292,7 @@ async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamNam
 
 
 
-async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens) {
+async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data) {
 
     console.log("START checkBattingList_For_a_Match")
 
@@ -316,7 +324,7 @@ async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chose
     if (found_a_match === false) {
         console.log("hold tide will we post your bat ");
         console.log("looking for a match on : ", matchSlug, " for  ", amount, "bat id is ", bat_id)
-        insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens)
+        insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data)
 
     }
     else {
@@ -370,10 +378,16 @@ async function updateGotAmatch(bat_id, matchSlug, amount, chosenTeam, oppTeam, b
 }
 
 
-async function insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens) {
-
+async function insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens, match_data) {
+      
 
     if (battingUser?.aud) {
+        let hour = begin_at.slice( 11 , 13)
+        let day = begin_at.slice( 8 , 10)
+        let month = begin_at.slice( 5 , 7)
+        let year = begin_at.slice( 0 , 4)
+        let min = begin_at.slice( 14 , 16)
+       
         const { update, update_error } = await supabase
             .from('accounts')
             .update({ tokens: (updateTokens - amount) })
@@ -403,6 +417,13 @@ async function insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, 
                     tournament_id: tournament_Id,
                     videoGame_id: videoGame,
                     email: battingUser.user_metadata.email,
+                    hour: hour,
+                    day: day,
+                    month: month,
+                    year: year,
+                    chosen_team_image: match_data.opponents[0].opponent.image_url,
+                    opp_team_image : match_data.opponents[1].opponent.image_url,
+                    minutes: min,
                 }
             ])
             .select()
@@ -456,10 +477,13 @@ function closePanel(setShowPanel) {
         team_02_Name,
         setChosenTeam,
         setChosenTeamName,
+        setChosenTeamImage,
         setGlow_Team1,
         setGlow_Team2,
         setOppTeam,
         setOppTeamName,
+        setOppTeamImage,
+        data,
         pickedTeam,
     ) {
         // const id = data.opponents[0].opponent.id;
@@ -467,10 +491,12 @@ function closePanel(setShowPanel) {
             case "team_1":
                 setChosenTeam(team_01_ID);
                 setChosenTeamName(team_01_Name);
+                setChosenTeamImage(data.opponents[0]?.opponent.image_url)
                 setGlow_Team1("team-image-glow w-20 h-20 m-auto");
                 setGlow_Team2(" w-20 h-20 m-auto");
                 setOppTeam(team_02_ID);
                 setOppTeamName(team_02_Name);
+                setOppTeamImage(data.opponents[1]?.opponent.image_url)
                 console.log("user choose ", chosenTeam, "as the winner");
                 //   get_UserData_And_Amount(setBattingUser , setAmount);
                 setTeam(1);
@@ -478,10 +504,12 @@ function closePanel(setShowPanel) {
             case "team_2":
                 setChosenTeam(team_02_ID);
                 setChosenTeamName(team_02_Name);
+                setChosenTeamImage(data.opponents[1]?.opponent.image_url)
                 setGlow_Team1("w-20 h-20 m-auto");
                 setGlow_Team2("team-image-glow w-20 h-20 m-auto");
                 setOppTeam(team_01_ID);
                 setOppTeamName(team_01_Name);
+                setOppTeamImage(data.opponents[0]?.opponent.image_url)
                 console.log("user choose ", chosenTeam, "as the winner");
                 //    get_UserData_And_Amount(setBattingUser , setAmount);
                 setTeam(2);

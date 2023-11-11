@@ -181,7 +181,7 @@ function SingelBat_Open({getUserBats ,setUser_data , setJoinBat,setMyBat , myBat
     const match_day_in_month = the_data.getDate(the_data);
     const match_hour = the_data.getHours(the_data) - 3;
     const match_minute = the_data.getMinutes(the_data);
-
+ 
     const curr_year = date.getFullYear(date);
     const curr_month = date.getMonth(date) + 1;
     const curr_day_in_month = date.getDate(date);
@@ -191,8 +191,8 @@ function SingelBat_Open({getUserBats ,setUser_data , setJoinBat,setMyBat , myBat
 
 
     // let currentTime = set;
-    let getyear = Math.round(date.getTime());
-    let currentyear = date.toString().slice(11, 16);
+    // let getyear = Math.round(date.getTime());
+    // let currentyear = date.toString().slice(11, 16);
 
 
     console.log(bat_steel_good, " <= GOOD : if bat is accpted ", bat.match_slug);

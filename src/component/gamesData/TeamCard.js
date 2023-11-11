@@ -7,18 +7,52 @@ import "../../App.css"
 
 
 export default function TeamCard({ data }) {
+  const [newData , setNewData] = useState(false)
   const [showPanel , setShowPanel] = useState(false);
   const [matchOpenBats , setMatchOpenBats ] = useState("");
   const [haveOpenBats , setHaveOpenBats] = useState(false);
   const [user , setUser] = useState("");
+  //______________________________sorting the data__________________________________
+  ;
+  // const the_data = "";
+  const date = new Date();
+  const curr_day = date.getDate(date);
+  const curr_hour = date.getHours(date);
+  const curr_minute = date.getMinutes(date);
+  const match_day = data.begin_at?.slice(8 , 10);
+  const match_hour = data.begin_at?.slice(11 , 13 );
+//  if(data.begin_at.slice(11 ,13) >= curr_hour && data.begin_at.slice(8 ,10) >= curr_day
+// console.log(" data" , data)
 
 
+//   if(match_day > curr_day){
+//     console.log("INNNNNN :: match_day > curr_day" , match_day , curr_day)
+//     setNewData(true)
+//   }
+//   else if(match_day == curr_day){
+//     if(match_hour >= curr_hour ){
+//       console.log("INNNNNNNN::  match_day === curr_day && match_hour >= curr_hour " , match_hour ,":", curr_hour)
+//       setNewData(true)
+//     } 
+//     else{
+//       console.log("OUTTTTTTT :: match_day < curr_day " , match_hour ,":", curr_hour)
+//       // setNewData(false)
+//         return;
+//     }
+//   }
+//   else{
+//     console.log("OUTTTTTTT :: match_day < curr_day", match_day ,":", curr_day)
+//     // setNewData(false)
+//     return;
+//   }
+//   console.log("NEW DATA ===>", newData)
+  
   return (
     // <div className="main-card" onClick={() => console.log("you picked a match")}>
     <>
   { showPanel? <div> {haveOpenBats? <div><OpenBats  matchOpenBats={matchOpenBats} matchData={data} setHaveOpenBats={setHaveOpenBats} setShowPanel={setShowPanel}/> </div> : <BattingPanel setShowPanel={setShowPanel} data={data} showPanel={showPanel}/>} </div> : 
     //   <div className="main-card" onClick={() => setShowPanel(true)}>
-      
+  
       <div className="main-card" onClick={() => getBats(setShowPanel , data ,setMatchOpenBats, setHaveOpenBats )}> 
        <div className="fifa-matchs flex flex-row">
         <div className="teams-card flex flex-row gap-6  m-auto">
@@ -55,7 +89,7 @@ export default function TeamCard({ data }) {
           </div>
         </div>
       </div>
-    </div>}
+    </div> }
     </>
   );
 }
