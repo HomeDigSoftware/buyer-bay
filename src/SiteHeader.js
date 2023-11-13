@@ -6,6 +6,7 @@ import ShowUserTokens from './component/gamesData/ShowUserTokens.js';
 import BatUpdate from './component/gamesData/BatUpdate.js';
 import UserAccount from './component/gamesData/UserAccount.js';
 import supabase from './services/supabase.js';
+import { OpenBatsCard } from "./component/gamesData/TeamCard.js"
 
 export function SiteHeader() {
   const [userTokens, setUserTokens] = useState("");
@@ -175,32 +176,37 @@ function AllBatsPanel({ match }) {
 
       <div>  
              <div>
-
             <div className="row" style={{ color: "blue" }}>
            {/* {todayOpenBats.map((bat)=>  bat.chosen_team_name + " <  ===  >")} */}
-              <div className='col-3'> 
+              <div className='col-2'> 
                  {match?.chosen_team_name} 
               </div>
              
-              <div className=' col-3'> 
+              <div className=' col-2'> 
                  {match?.opp_team_name}
               </div>
            
-              <div className=' col-3'> 
+              <div className=' col-2'> 
                  {match.hour}  :0    
                  {match.minutes}                             
               </div>
 
-              <div className='col-3'> 
+              <div className='col-2'> 
                 {match.opp_team_name}
                 <div>
                    {match?.tokens}
                     </div> 
               </div>
-                       
-
+              <div className='col-4 flex flex-row'> 
+                 <img className='w-20 h-20 m-auto' src={match?.chosen_team_image} alt='team-image' />
+               <div> VS </div>  
+                 <img className='w-20 h-20 m-auto' src={match?.opp_team_image} alt='team-image' />
+              </div>
+              <div> 
+                <button onClick={()=> <OpenBatsCard />}>Bat On</button>
+              </div>
         </div>
-        <div className='row'>
+        {/* <div className='row'> matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel
         <div className=" col-3">
           <img className='w-20 h-20 m-auto' src={match?.chosen_team_image} alt='team-image' />
         </div>
@@ -208,24 +214,20 @@ function AllBatsPanel({ match }) {
           <img className='w-20 h-20 m-auto' src={match?.opp_team_image} alt='team-image' />
         </div>
         </div>
-
-
         <div className=" col-3" style={{ color: "blue" }}>
+        </div> */}
+        {/* <div> 
+          {nextBats?.chosen_team_name} 
+          {nextBats?.opp_team_name}
+          <img className='w-20 h-20 m-auto' src={nextBats?.chosen_team_image} alt='team-image' />
+          <img className='w-20 h-20 m-auto' src={nextBats?.opp_team_image} alt='team-image'/>
 
-        </div>
+           :: {nextDayOpenBats.map((upcomingbat)=>  upcomingbat.chosen_team_name + "  :::  :: :  ")} ::
+        </div>*/}
+        {/* <div style={{ color: "green" }}>
+ 
 
-        <div> 
-          {/* {nextBats?.chosen_team_name} */}
-          {/* {nextBats?.opp_team_name} */}
-          {/* <img className='w-20 h-20 m-auto' src={nextBats?.chosen_team_image} alt='team-image' /> */}
-          {/* <img className='w-20 h-20 m-auto' src={nextBats?.opp_team_image} alt='team-image'/> */}
-
-          {/* :: {nextDayOpenBats.map((upcomingbat)=>  upcomingbat.chosen_team_name + "  :::  :: :  ")} :: */}
-        </div>
-        <div style={{ color: "green" }}>
-
-
-        </div>
+        </div> */}
       </div>
     </div>
 

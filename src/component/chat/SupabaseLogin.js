@@ -24,6 +24,12 @@ export default function SupaBaseSingIn() {
 
   }
 
+  const handleTwichSingIn = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'twitch',
+    })
+  }
+
   async function handleSingOutUser() {
     const { error } = await supabase.auth.signOut();
     setsupaUser({});
@@ -176,7 +182,9 @@ export default function SupaBaseSingIn() {
       <div>
         {supaUser.aud === "authenticated" ? <h5> {supaUser.aud}</h5> : <h4> Not authenticated</h4>}
       </div>
-      {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : <div> <LoginButton onSingin={HandleSingIn} />
+      {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : 
+      <div> <LoginButton onSingin={HandleSingIn} /> 
+            <TwichLoginButton onTwichSingin={handleTwichSingIn} />
       </div>}
       <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click} />
       <form onSubmit={(e) => handleSendMessage(e)} className="send-message">
@@ -239,6 +247,15 @@ function LoginButton({ onSingin }) {
   );
 }
 
+function TwichLoginButton({ onTwichSingin }) {
+  return (
+    <div className='valorant-card'>
+      <button className="data-btn" onClick={onTwichSingin}>
+         Login with Twich
+      </button>
+    </div>
+  );
+}
 
 
 function ChatMessages({ dbMessagedata, supaUser }) {

@@ -162,7 +162,7 @@ function OpenBats({matchOpenBats ,matchData , setHaveOpenBats , setShowPanel}) {
 }
 
 
-function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel}){
+export function OpenBatsCard({ matchOpenBats ,matchData , setHaveOpenBats ,setShowPanel}){
    const [localUser , setLocalUser] = useState("");
   
   console.log("local user =======>>>>>> " , localUser)
