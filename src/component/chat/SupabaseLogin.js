@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import supabase from "../../services/supabase.js";
-import '../../App.css'
+import '../../App.css';
+import GoogleLogo from "../../logo-package-GOLD/Singin-logos/btn_google_signin_dark_pressed_web.png";
+import DiscordLogo from "../../logo-package-GOLD/Singin-logos/discord-logo-png-7618.png";
+import TwichLogo from "../../logo-package-GOLD/Singin-logos/pngfind.com-facebook-logo-png-transparent-579959.png";
+
 
 export default function SupaBaseSingIn() {
   const [supaUser, setsupaUser] = useState({});
@@ -29,6 +33,13 @@ export default function SupaBaseSingIn() {
       provider: 'twitch',
     })
   }
+
+  const handleDiscordSingIn = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'discord',
+    })
+  }
+
 
   async function handleSingOutUser() {
     const { error } = await supabase.auth.signOut();
@@ -185,6 +196,7 @@ export default function SupaBaseSingIn() {
       {supaUser.aud === "authenticated" ? <div><SingoutButton onSingOut={handleSingOutUser} /></div> : 
       <div> <LoginButton onSingin={HandleSingIn} /> 
             <TwichLoginButton onTwichSingin={handleTwichSingIn} />
+            <DiscordLoginButton onDiscordSingin={handleDiscordSingIn} />
       </div>}
       <GetDBMessages onGetMessagees={getAllMessages} dbMessage={dbMessage} supaUser={supaUser} click={click} />
       <form onSubmit={(e) => handleSendMessage(e)} className="send-message">
@@ -239,24 +251,36 @@ function SingoutButton({ onSingOut }) {
 
 function LoginButton({ onSingin }) {
   return (
-    <div className='valorant-card'>
-      <button className="data-btn" onClick={onSingin}>
-        Supabaes Login with google
-      </button>
+    <div className='google-singin-logo '>
+      {/* <button className="" onClick={onSingin}>
+         Login with google
+      </button> */}
+      <img className="google-singin-logo " src={GoogleLogo} alt="login logo" onClick={onSingin} />
     </div>
   );
 }
 
 function TwichLoginButton({ onTwichSingin }) {
   return (
-    <div className='valorant-card'>
-      <button className="data-btn" onClick={onTwichSingin}>
+    <div className=''>
+      {/* <button className="twich-singin-logo " onClick={onTwichSingin}>
          Login with Twich
-      </button>
+      </button> */}
+        <img className="twich-singin-logo" src={TwichLogo} alt="login logo" onClick={onTwichSingin} />
     </div>
   );
 }
 
+function DiscordLoginButton({onDiscordSingin}){
+  return(
+    <div>
+
+      {/* <button className="discord-singin-logo data-btn" onClick={onDiscordSingin}>Login with Discord */}
+       <img className="discord-singin-logo  " src={DiscordLogo} alt="login logo" onClick={onDiscordSingin} />
+      {/* </button> */}
+    </div>
+  )
+}
 
 function ChatMessages({ dbMessagedata, supaUser }) {
   // const scroll = useRef();

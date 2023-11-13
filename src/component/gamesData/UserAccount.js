@@ -58,7 +58,7 @@ export default function UserAccount() {
 
 
     return (
-        <div>
+        <div className="">
             <button onClick={() => getUserBats(setUser_data, setJoinBat, setMyBat)}> Account </button>
             {showAccount ? <div className="" style={{ display: 'inline-block', color: "black" }}>
                 <AccountPanel getUserBats={getUserBats} setUser_data={setUser_data} setJoinBat={setJoinBat} setMyBat={setMyBat} myBat={myBat} joinBat={joinBat} setShowAccount={setShowAccount} user_data={user_data} /> </div>

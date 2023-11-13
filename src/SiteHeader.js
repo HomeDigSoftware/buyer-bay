@@ -41,7 +41,7 @@ export function SiteHeader() {
 
     <header className="border-bottom lh-1 py-3">
       <div className="main-header row flex-nowrap justify-content-between align-items-center text-center">
-        <div className="col-3 pt-1 flex flex-row">
+        <div className="col-3 pt-1 flex flex-row ">
 
           <AddTokens userTokens={userTokens} setUserTokens={setUserTokens} />
           <BatUpdate />
@@ -54,13 +54,20 @@ export function SiteHeader() {
 
         </div>
 
-        <div className="col-3 d-flex justify-content-end pr-5">
-          <button className='token-btn btn btn-secondary'> <UserAccount /> </button>
-          <a className="link-secondary-icon" href="#" aria-label="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-          </a>
+        <div className="col-3">
+          <div className='row'>
+            <div className='col-4' ></div>
+            <div className='col-4'></div>          
+            <div className='col-4'>
+              <button className='token-btn btn btn-secondary'> <UserAccount /> </button>
 
-          <a className="btn btn-sm " href="#">Sign up</a>
+            </div>
+          </div>
+          {/* <a className="link-secondary-icon" href="#" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
+          </a> */}
+
+          {/* <a className="btn btn-sm " href="#">Sign up</a> */}
         </div>
 
       </div>
@@ -124,7 +131,7 @@ function GetAllOpenBats() {
     // data.map((match_time)=>  console.log("today matchssss : " , match_time.hour , " time: day" , match_time.day));
   }
   return (
-    <div>
+    <div className=' m-auto'>
       <button className="token-btn btn btn-secondary m-auto"
         onClick={() => getUpcoming()} >
         today bats

@@ -377,3 +377,31 @@ body,
   padding-top: 5px;
 }
 
+.twich-singin-logo{
+  margin: auto;
+  margin-top: 10px;
+  height: 60px;
+  width: 250px;
+  /* background-image: url("./logo-package-GOLD/Singin-logos/pngfind.com-facebook-logo-png-transparent-579959.png"); */
+  background-size: cover;
+  
+}
+
+.discord-singin-logo{
+  margin: auto;
+  margin-top: 10px;
+  height: 60px;
+  width: 250px;
+  /* background-image: url('./logo-package-GOLD/Singin-logos/discord-logo-png-7618.png'); */
+  background-size: cover;
+  background-color: #333333;
+}
+
+.google-singin-logo{
+  margin: auto;
+  margin-top: 10px;
+  height: 60px;
+  width: auto;
+  /* background-image: url('./logo-package-GOLD/Singin-logos/btn_google_signin_dark_pressed_web.png'); */
+  background-size: cover; 
+}
