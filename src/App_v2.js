@@ -1,17 +1,32 @@
 import React from 'react';
-import { useState } from "react";
+import { useState , useEffect  } from "react";
 import axios from "axios";
 import './App.css'
 import { auth } from "./firebase";
 //import { useAuthState } from "react-firebase-hooks/auth";
 import { GamesButtons } from './component/gamesData/GamesButtons.js';
 import { SiteHeader } from './SiteHeader.js';
+import StripTest from './services/StripeTest';
+
+
+// import {Elements} from '@stripe/react-stripe-js';
+// import {loadStripe} from '@stripe/stripe-js';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+// const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIP_KEY);
 
 
 export default function App_v2() {
  // const [user] = useAuthState(auth);
   const [upcomingData, setUpcomingData] = useState([]);
  
+
+  // const options = {
+  //   // passing the client secret obtained from the server
+  //   clientSecret: '{{process.env.REACT_APP_SECRET_STRIPE_KEY}}',
+  // };
+
 
   function handleGetUpcoming() {
     const options = {
@@ -24,8 +39,7 @@ export default function App_v2() {
       },
       headers: {
         accept: "application/json",
-        authorization:
-          "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
+        authorization: `Bearer ${process.env.REACT_APP_PANDASCORE_KEY}`
       },
     };
 
@@ -50,7 +64,12 @@ export default function App_v2() {
       <SiteHeader />
       {/* <TestingNavbar /> */}
       <GamesButtons /> 
-      
+      {/* <Elements stripe={stripePromise} options={options}> */}
+        {/* <CheckoutForm /> */}
+      {/* </Elements> */}
+      {/* <div className='stripe-elment'>
+        <StripTest />
+      </div> */}
     </div>
   )
 }

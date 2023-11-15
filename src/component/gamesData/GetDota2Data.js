@@ -42,7 +42,7 @@ async function getDota2MatchApiCall(setDota2Match){
 //       // 'Access-Control-Allow-Origin': true,
 //       accept: "application/json",
 //       authorization:
-//         "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
+//          authorization: `Bearer ${process.env.REACT_APP_PANDASCORE_KEY}`
 //     }
 //   };
 

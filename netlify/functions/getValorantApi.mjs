@@ -15,7 +15,7 @@ export const handler = async (event , context) => {
       },
     headers:{
         "Content-Type" : "application/json",
-        authorization: 'Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0'
+        authorization: `Bearer ${process.env.REACT_APP_PANDASCORE_KEY}`
     },
    }
    const response = await fetch(PANDA_API , options)

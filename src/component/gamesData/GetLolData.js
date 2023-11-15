@@ -30,7 +30,18 @@ async function getLolMatchApiCall(setLolMatch){
  const dataText = JSON.parse(data);
   // console.log(" DATA :",data01)
   setLolMatch(dataText.upcoming);
+  // stripNewUserTest();
 }
+
+// async function stripNewUserTest(){
+//   const server_stripCall = (await fetch("./netlify/functions/stripeNewCustomer", {
+//     method:"POST" ,
+
+//   }))
+//   const strip_res = await server_stripCall.text();
+//   // const stripedata = JSON.parse(strip_res)
+//   console.log("stripedata" , strip_res);
+// }
 
 // function handleGetLolData(setLolMatch) {
 //   const options = {
@@ -44,7 +55,7 @@ async function getLolMatchApiCall(setLolMatch){
 //     headers: {
 //       accept: "application/json",
 //       authorization:
-//         "Bearer zZPjgAB6F45VSq8m_KkFT3lRm6WACovbn1bzx-86Q3-CPK3IAH0",
+//          authorization: `Bearer ${process.env.REACT_APP_PANDASCORE_KEY}`
 //     },
 //   };
 
