@@ -7,14 +7,16 @@ import { auth } from "./firebase";
 import { GamesButtons } from './component/gamesData/GamesButtons.js';
 import { SiteHeader } from './SiteHeader.js';
 import StripTest from './services/StripeTest';
+import StripePaymentRequest from './services/StripePaymentRequest';
 
 
-// import {Elements} from '@stripe/react-stripe-js';
-// import {loadStripe} from '@stripe/stripe-js';
+
+ import {Elements} from '@stripe/react-stripe-js';
+ import {loadStripe} from '@stripe/stripe-js';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-// const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIP_KEY);
+ const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIP_KEY);
 
 
 export default function App_v2() {
@@ -22,10 +24,10 @@ export default function App_v2() {
   const [upcomingData, setUpcomingData] = useState([]);
  
 
-  // const options = {
-  //   // passing the client secret obtained from the server
-  //   clientSecret: '{{process.env.REACT_APP_SECRET_STRIPE_KEY}}',
-  // };
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: '{{process.env.REACT_APP_SECRET_STRIPE_KEY}}',
+  };
 
 
   function handleGetUpcoming() {
@@ -64,12 +66,12 @@ export default function App_v2() {
       <SiteHeader />
       {/* <TestingNavbar /> */}
       <GamesButtons /> 
-      {/* <Elements stripe={stripePromise} options={options}> */}
-        {/* <CheckoutForm /> */}
-      {/* </Elements> */}
-      {/* <div className='stripe-elment'>
-        <StripTest />
-      </div> */}
+      <Elements stripe={stripePromise} >
+        {console.log(stripePromise)}
+         <StripePaymentRequest />
+      </Elements>
+   
+    
     </div>
   )
 }
