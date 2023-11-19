@@ -66,10 +66,10 @@ export default function App_v2() {
       <SiteHeader />
       {/* <TestingNavbar /> */}
       <GamesButtons /> 
-      <Elements stripe={stripePromise} >
+      {/* <Elements stripe={stripePromise} >
         {console.log(stripePromise)}
          <StripePaymentRequest />
-      </Elements>
+      </Elements> */}
    
     
     </div>
