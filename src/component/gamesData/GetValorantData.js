@@ -31,9 +31,9 @@ async function onGetData(setValorantMatch){
   } )
   //  .then(server_response => server_response.text);
   const theData = await server_response.text();
-  console.log("the data ========== " , theData.upcoming);
+  // console.log("the data ========== " , theData.upcoming);
   const text = JSON.parse(theData)
-  console.log(text.upcoming);
+  // console.log(text.upcoming);
   setValorantMatch(text.upcoming)
 
  

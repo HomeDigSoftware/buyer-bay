@@ -110,7 +110,7 @@ export default function SingelBat_Open({ getUserBats, setUser_data, setJoinBat, 
             .from("incoming")
             .select("*")
             .eq("bat_id", bat.id);
-        console.log("windata ======>>>>>> ", windata[0]);
+        // console.log("windata ======>>>>>> ", windata[0]);
         // console.log("windata ======>>>>>> ", windata)
         setWinnerEmail(windata[0].winner_email);
         setTeamImage(windata[0].winner_team_image);
@@ -140,17 +140,17 @@ export default function SingelBat_Open({ getUserBats, setUser_data, setJoinBat, 
         getUserBats(setUser_data, setJoinBat, setMyBat);
     }
     //bat.user_id === user_data.id && winnerTeamData.id === bat.chosen_team_id || bat.opp_user_id === user_data.id && winnerTeamData.id === bat.opp_team_id
-    console.log("bat.user_id :", bat.user_id);
-    console.log("user_data.id :", user_data.id);
-    console.log("winnerTeamData.id :", winnerTeamData.id);
-    console.log("bat.chosen_team_id :", bat.chosen_team_id);
-    console.log("bat.opp_user_id :", bat.opp_user_id);
-    console.log("bat.opp_team_id :", bat.opp_team_id);
-    console.log("bat.opp_user_id :", bat.opp_user_id);
-    console.log(bat.user_id === user_data.id);
-    console.log(winnerTeamData.id === bat.chosen_team_id);
-    console.log(bat.opp_user_id === user_data.id);
-    console.log(winnerTeamData.id === bat.opp_team_id);
+    // console.log("bat.user_id :", bat.user_id);
+    // console.log("user_data.id :", user_data.id);
+    // console.log("winnerTeamData.id :", winnerTeamData.id);
+    // console.log("bat.chosen_team_id :", bat.chosen_team_id);
+    // console.log("bat.opp_user_id :", bat.opp_user_id);
+    // console.log("bat.opp_team_id :", bat.opp_team_id);
+    // console.log("bat.opp_user_id :", bat.opp_user_id);
+    // console.log(bat.user_id === user_data.id);
+    // console.log(winnerTeamData.id === bat.chosen_team_id);
+    // console.log(bat.opp_user_id === user_data.id);
+    // console.log(winnerTeamData.id === bat.opp_team_id);
 
     return (
         <div className="">

@@ -16,7 +16,7 @@ export default function SiteHeader() {
     async function getUserData() {
       await supabase.auth.getUser().then((value) => {
         if (value.data?.user) {
-          console.log(" This is the supauser : ", value.data.user)
+          // console.log(" This is the supauser : ", value.data.user)
           setUser(value.data.user.aud)
           // return
           getTokensDB(value.data.user, setUserTokens);
@@ -33,7 +33,7 @@ export default function SiteHeader() {
       .from('accounts')
       .select('tokens')
       .eq('user_id', user.id)    // Correct
-    console.log("the _____from SITE HEADER __________data :: ", data[0]?.tokens)
+    // console.log("the _____from SITE HEADER __________data :: ", data[0]?.tokens)
     setUserTokens(data[0]?.tokens)
   }
 

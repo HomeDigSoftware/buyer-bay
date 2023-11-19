@@ -23,7 +23,7 @@ export default function SupaBaseSingIn() {
         },
       },
     })
-    console.log(data);
+    // console.log(data);
   }
 
   const handleTwichSingIn = async () => {
@@ -50,7 +50,7 @@ export default function SupaBaseSingIn() {
         .from('messages')
         .select('*')
       messages.map((data) => {
-        console.log(data);
+        // console.log(data);
       })
       dbDataMessages(messages);
     }
@@ -76,7 +76,7 @@ export default function SupaBaseSingIn() {
       ])
       .select()
     setNewDbMessage("");
-    console.log("sending", supaUser.aud)
+    // console.log("sending", supaUser.aud)
     getAllMessages();
   }
 
@@ -95,7 +95,7 @@ export default function SupaBaseSingIn() {
     .eq('user_id', the_user.id) 
    
     if(data.length === 0 && the_user.aud === "authenticated"){
-      console.log("its going throug" ,the_user );
+      // console.log("its going throug" ,the_user );
        const { data, error } = await supabase
         .from('accounts')
         .insert([

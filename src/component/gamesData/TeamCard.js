@@ -83,7 +83,7 @@ async function getBats( setShowPanel ,matchdata , setMatchOpenBats , setHaveOpen
   .select()
   .eq("match_ok" , false)
 
-  console.log( "Match slug  = ",  matchdata , " match amount = " , open_bats.match_ok);
+  // console.log( "Match slug  = ",  matchdata , " match amount = " , open_bats.match_ok);
   if(open_bats.length >= 0){
     
     setMatchOpenBats(open_bats);
@@ -91,12 +91,12 @@ async function getBats( setShowPanel ,matchdata , setMatchOpenBats , setHaveOpen
       if (bat.match_slug === matchdata.slug ) {
      
         count++;
-        console.log( " db match OK =  " ,  bat.match_ok)
-        console.log( " db open bat slug" , bat.match_slug )
-        console.log( " match DB id" , bat.id)
-        console.log( " db bat amount " , bat.tokens)
-        console.log( " oppnent chosen team " , bat.chosen_team_id)     
-        console.log( " current match slug " , matchdata.slug)
+        // console.log( " db match OK =  " ,  bat.match_ok)
+        // console.log( " db open bat slug" , bat.match_slug )
+        // console.log( " match DB id" , bat.id)
+        // console.log( " db bat amount " , bat.tokens)
+        // console.log( " oppnent chosen team " , bat.chosen_team_id)     
+        // console.log( " current match slug " , matchdata.slug)
        setThePanel(setHaveOpenBats);
        
      }    
@@ -106,7 +106,7 @@ async function getBats( setShowPanel ,matchdata , setMatchOpenBats , setHaveOpen
    })
   }
   else {
-    console.log(" show bating panel"); //bat.match_slug 
+    // console.log(" show bating panel"); //bat.match_slug 
     setShowPanel(true)
   }
  
@@ -114,7 +114,7 @@ async function getBats( setShowPanel ,matchdata , setMatchOpenBats , setHaveOpen
 function setThePanel(setHaveOpenBats){
   setHaveOpenBats(false)
   setHaveOpenBats(true)
-  console.log("set the panel")
+  // console.log("set the panel")
 }
 
 function OpenBats({matchOpenBats ,matchData , setHaveOpenBats , setShowPanel}) {

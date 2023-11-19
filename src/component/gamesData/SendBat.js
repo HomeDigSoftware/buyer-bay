@@ -5,7 +5,7 @@ import supabase from '../../services/supabase';
 export default function SendBat({matchOpenBats}){
 
 
-    console.log('__________updateBat_List _______')
+    // console.log('__________updateBat_List _______')
      updateBat_List(matchOpenBats)
     return(
         <div>
@@ -17,8 +17,8 @@ export default function SendBat({matchOpenBats}){
 
 async function updateBat_List(   matchOpenBats) {
    
-    console.log('__________updateBat_List _______')
-    console.log('matchOpenBats' ,matchOpenBats)
+    // console.log('__________updateBat_List _______')
+    // console.log('matchOpenBats' ,matchOpenBats)
 
  let user = "";
 let userTokens = "";
@@ -28,7 +28,7 @@ let userTokens = "";
   
    if(value.data?.user){
      user = value.data.user;
-     console.log(" This is the supauser : " ,user)
+    //  console.log(" This is the supauser : " ,user)
    }
  })
 

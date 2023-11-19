@@ -198,7 +198,7 @@ async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamNam
         .select("tokens")
         .eq('user_id', battingUser.id)
 
-    console.log("START sendBat ", data[0].tokens)
+    // console.log("START sendBat ", data[0].tokens)
     updateTokens = data[0].tokens
     if (data[0].tokens >= amount) {
         checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data);
@@ -211,7 +211,7 @@ async function sendBat(matchSlug, battingUser, amount, chosenTeam, chosenTeamNam
 
 async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data) {
 
-    console.log("START checkBattingList_For_a_Match")
+    // console.log("START checkBattingList_For_a_Match")
 
     let found_a_match = false;
     let bat_id = ""
@@ -219,10 +219,10 @@ async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chose
     const { data, error } = await supabase
         .from("bat_list")
         .select('*')
-    console.log(' from checking for a match  ', data);
+    // console.log(' from checking for a match  ', data);
     data.map((bat) => {
         if (bat.match_slug === matchSlug && bat.tokens === amount && bat.chosen_team_id !== chosenTeam && bat.match_ok === "false") { //&& bat.user_id != battingUser.id)
-            console.log("we have a match for :", bat.tokens, "bat DB ID : ", bat.id)//,data.tokens
+            // console.log("we have a match for :", bat.tokens, "bat DB ID : ", bat.id)//,data.tokens
             found_a_match = true;
             bat_id = bat.id;
             //_____________________her enter updat func on the bat table 
@@ -234,14 +234,14 @@ async function checkBattingList_For_a_Match(matchSlug, amount, chosenTeam, chose
 
     if (found_a_match === false) {
         console.log("hold tide will we post your bat ");
-        console.log("looking for a match on : ", matchSlug, " for  ", amount, "bat id is ", bat_id)
+        // console.log("looking for a match on : ", matchSlug, " for  ", amount, "bat id is ", bat_id)
         insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens ,match_data)
     }
     else {
-        console.log("END checkBattingList_For_a_Match", bat_id)
+        // console.log("END checkBattingList_For_a_Match", bat_id)
         updateGotAmatch(bat_id, matchSlug, amount, chosenTeam, oppTeam, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens);
     }
-    console.log("END checkBattingList_For_a_Match", bat_id)
+    // console.log("END checkBattingList_For_a_Match", bat_id)
 }
 
 async function updateGotAmatch(bat_id, matchSlug, amount, chosenTeam, oppTeam, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens) {
@@ -276,7 +276,7 @@ async function updateGotAmatch(bat_id, matchSlug, amount, chosenTeam, oppTeam, b
         .eq("user_id", battingUser.id)
         .select()
 
-    console.log("END updateGotAmatch", bat_id, matchSlug, update_error, data)
+    // console.log("END updateGotAmatch", bat_id, matchSlug, update_error, data)
 }
 
 async function insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, oppTeam, oppTeamName, battingUser, matchID, begin_at, leagueId, tournament_Id, videoGame, updateTokens, match_data) {
@@ -332,12 +332,12 @@ async function insertBat(bat_id, matchSlug, amount, chosenTeam, chosenTeamName, 
 async function get_UserData_And_Amount(setBattingUser, setAmount, amount) {
     const { data: { user } } = await supabase.auth.getUser()
     if (user?.aud) {
-        console.log(user.id)
+        // console.log(user.id)
         set_UserData_And_Amount(user, setBattingUser, setAmount, amount)
     }
     else {
         // need to display a screen message you need to loged in 
-        console.log("user aud is null probebly")
+        // console.log("user aud is null probebly")
         return
     }
 }
@@ -386,7 +386,7 @@ function choseTeam(
                 setOppTeam(team_02_ID);
                 setOppTeamName(team_02_Name);
                 setOppTeamImage(data.opponents[1]?.opponent.image_url)
-                console.log("user choose ", chosenTeam, "as the winner");
+                // console.log("user choose ", chosenTeam, "as the winner");
                 setTeam(1);
                 break;
             
@@ -399,7 +399,7 @@ function choseTeam(
                 setOppTeam(team_01_ID);
                 setOppTeamName(team_01_Name);
                 setOppTeamImage(data.opponents[0]?.opponent.image_url)
-                console.log("user choose ", chosenTeam, "as the winner");
+                // console.log("user choose ", chosenTeam, "as the winner");
                 setTeam(2);
                 break;
         }

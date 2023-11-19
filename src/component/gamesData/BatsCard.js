@@ -3,8 +3,8 @@ import AllBatsPanel from './AllBatsPanel';
 
 
 export default function BatsCard({ nextBats, todaybats }) {
-  console.log("nextBats ", nextBats);
-  console.log("todayOpenBats ", todaybats);
+  // console.log("nextBats ", nextBats);
+  // console.log("todayOpenBats ", todaybats);
 
   return (
     <div className='all-bats-panel'>

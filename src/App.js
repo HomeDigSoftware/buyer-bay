@@ -22,7 +22,7 @@ const Dota = () => {
 
 const LolLeauge = () => {
   // let data = this.props.match.params;
-  console.log()
+  // console.log()
 
   return (
     <div>

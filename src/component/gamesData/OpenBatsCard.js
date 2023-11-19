@@ -6,15 +6,15 @@ import supabase from '../../services/supabase.js';
 export default function OpenBatsCard({ matchOpenBats, matchData, setHaveOpenBats, setShowPanel }) {
   const [localUser, setLocalUser] = useState("");
 
-  console.log("local user =======>>>>>> ", localUser);
+  // console.log("local user =======>>>>>> ", localUser);
   let team_image = "";
-  console.log("matchOpenBats.match_ok === false && matchOpenBats.match_id === matchData.id");
-  console.log("matchOpenBats.match_ok ==> ", matchOpenBats.match_ok);
-  console.log(matchOpenBats.match_id, " <= matchOpenBats.match_id === matchData.id => ", matchData.id);
+  // console.log("matchOpenBats.match_ok === false && matchOpenBats.match_id === matchData.id");
+  // console.log("matchOpenBats.match_ok ==> ", matchOpenBats.match_ok);
+  // console.log(matchOpenBats.match_id, " <= matchOpenBats.match_id === matchData.id => ", matchData.id);
 
   if (matchOpenBats.match_ok === "false" && matchOpenBats.match_id === matchData.id) {
 
-    console.log("AAAAAAA");
+    // console.log("AAAAAAA");
 
     return (
 
@@ -56,8 +56,8 @@ export default function OpenBatsCard({ matchOpenBats, matchData, setHaveOpenBats
 
   async function updateBat_List(matchOpenBats, setHaveOpenBats, setShowPanel) {
 
-    console.log('__________updateBat_List _______');
-    console.log('matchOpenBats', matchOpenBats);
+    // console.log('__________updateBat_List _______');
+    // console.log('matchOpenBats', matchOpenBats);
 
     let user = "";
     let userTokens = "";
@@ -67,7 +67,7 @@ export default function OpenBatsCard({ matchOpenBats, matchData, setHaveOpenBats
 
       if (value.data?.user) {
         user = value.data.user;
-        console.log(" This is the supauser : ", user);
+        // console.log(" This is the supauser : ", user);
       }
     });
 
@@ -79,16 +79,16 @@ export default function OpenBatsCard({ matchOpenBats, matchData, setHaveOpenBats
       .eq('user_id', user.id);
 
     userTokens = data[0];
-    console.log(" get tokens => ", userTokens);
+    // console.log(" get tokens => ", userTokens);
     postBat(userTokens, matchOpenBats, user, setHaveOpenBats, setShowPanel);
 
   }
 
   function postBat(userTokens, matchOpenBats, user, setHaveOpenBats, setShowPanel) {
-    console.log('__________postBat _______');
-    console.log('userTokens', userTokens);
-    console.log('matchOpenBats', matchOpenBats);
-    console.log('user', user);
+    // console.log('__________postBat _______');
+    // console.log('userTokens', userTokens);
+    // console.log('matchOpenBats', matchOpenBats);
+    // console.log('user', user);
 
 
     theBat(userTokens, matchOpenBats, user, setHaveOpenBats, setShowPanel);
@@ -96,14 +96,14 @@ export default function OpenBatsCard({ matchOpenBats, matchData, setHaveOpenBats
 
   async function theBat(userTokens, matchOpenBats, user, setHaveOpenBats, setShowPanel) {
 
-    console.log('__________the bat _______');
-    console.log('userTokens', userTokens);
-    console.log('matchOpenBats', matchOpenBats);
+    // console.log('__________the bat _______');
+    // console.log('userTokens', userTokens);
+    // console.log('matchOpenBats', matchOpenBats);
 
-    console.log('user', user.id);
+    // console.log('user', user.id);
 
 
-    console.log(' user data', userTokens.tokens, matchOpenBats.tokens);
+    // console.log(' user data', userTokens.tokens, matchOpenBats.tokens);
     if (user.id !== matchOpenBats.user_id) {
       if (userTokens.tokens >= matchOpenBats.tokens) {
 

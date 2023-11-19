@@ -25,7 +25,7 @@ export default function UserAccount() {
             // Filters
             .eq('user_id', user.id)
         setMyBat(bat_list02)
-        console.log(bat_list02.map((bat) => (bat.id, bat.match_ok)))
+        // console.log(bat_list02.map((bat) => (bat.id, bat.match_ok)))
         //_________________________________________________________________________________________________
 
         let { data: bat_list01, error01 } = await supabase
@@ -35,10 +35,10 @@ export default function UserAccount() {
             // Filters
             .eq('opp_user_id', user.id)
         setJoinBat(bat_list01)
-        console.log(bat_list01.map((bat) => (bat.id, bat.match_ok)))
+        // console.log(bat_list01.map((bat) => (bat.id, bat.match_ok)))
 
         //_________________________________________________________________________________________________
-        console.log(" my-bat =>  ")
+        // console.log(" my-bat =>  ")
         setUser_data(user)
         setShowAccount(true)
 
@@ -116,7 +116,7 @@ export async function check_Winner(user_data, userTeam, setWinnerTeamData, setWi
         return
     }
     else {
-        console.log("start")
+        // console.log("start")
         const server_response = await fetch('/.netlify/functions/checkWinnerApi', {
             method: "POST",
             body: JSON.stringify({
@@ -125,8 +125,8 @@ export async function check_Winner(user_data, userTeam, setWinnerTeamData, setWi
         })
         const theData = await server_response.text();
         const text = JSON.parse(theData)
-        console.log(" new API call test", text.upcoming.slug);
-        console.log(" the Winner : ", text.upcoming.winner?.name);
+        // console.log(" new API call test", text.upcoming.slug);
+        // console.log(" the Winner : ", text.upcoming.winner?.name);
         if (text.upcoming.winner !== null) {
             setWinnerTeam(text.upcoming.winner.id)
             setWinnerTeamData(text.upcoming.winner)
@@ -142,19 +142,19 @@ export async function check_Winner(user_data, userTeam, setWinnerTeamData, setWi
 
 
 async function winnerUpdate(bat, user_data, userTeam, winnerTeamData, wins_tokens, setWinnerEmail, setTeamImage ,setTeamName) {
-    console.log("user_data", user_data);
-    console.log("userTeam", userTeam);
-    console.log("winnerTeamData", winnerTeamData);
-    console.log("wins_tokens", wins_tokens);
-    console.log("match slug", bat.match_slug);
-    console.log("opp email", bat.opp_email);
+    // console.log("user_data", user_data);
+    // console.log("userTeam", userTeam);
+    // console.log("winnerTeamData", winnerTeamData);
+    // console.log("wins_tokens", wins_tokens);
+    // console.log("match slug", bat.match_slug);
+    // console.log("opp email", bat.opp_email);
     let winner_team_image = winnerTeamData.image_url;
     let winner_team_name = winnerTeamData.name;
     let getTokens = null;
     let total_wins = (wins_tokens * 2);
     let fee = (total_wins / 100) * 5
 
-    console.log("from the update ", winnerTeamData, winnerTeamData.id)
+    // console.log("from the update ", winnerTeamData, winnerTeamData.id)
     const { w_data, update_error } = await supabase
         .from('bat_list')
         .update({ winning_team_id: winnerTeamData.id })
@@ -181,15 +181,15 @@ async function winnerUpdate(bat, user_data, userTeam, winnerTeamData, wins_token
             .eq("user_id", bat.user_id)
             .select()
 
-        console.log("AAAAAAA wins tokens :", total_wins )
-        console.log("AAA fee :", fee)
-        console.log("AAA total tokens user tokens :",  getTokens + total_wins - fee )
-        console.log("AAA bat.id:", bat.id )
-        console.log("AAA user_data.id:", user_data.id )
-        console.log("AAA total_wins:",  total_wins )
-        console.log("AAA winner_team_image,:", winner_team_image )
-        console.log("AAA bat.match_slug", bat.match_slug )
-        console.log("AAA user_data.email :", bat.email )
+        // console.log("AAAAAAA wins tokens :", total_wins )
+        // console.log("AAA fee :", fee)
+        // console.log("AAA total tokens user tokens :",  getTokens + total_wins - fee )
+        // console.log("AAA bat.id:", bat.id )
+        // console.log("AAA user_data.id:", user_data.id )
+        // console.log("AAA total_wins:",  total_wins )
+        // console.log("AAA winner_team_image,:", winner_team_image )
+        // console.log("AAA bat.match_slug", bat.match_slug )
+        // console.log("AAA user_data.email :", bat.email )
      
      
         const {data: fee_recored, error} = await supabase
@@ -226,15 +226,15 @@ async function winnerUpdate(bat, user_data, userTeam, winnerTeamData, wins_token
             .eq("user_id", bat.opp_user_id)
             .select()
 
-        console.log("BBBBBBBBB  wins tokens :", total_wins )
-        console.log("BBB fee :", fee)
-        console.log("BBB total tokens user tokens :",  getTokens + total_wins - fee )
-        console.log("BBB bat.id:", bat.id )
-        console.log("BBB user_data.id:", user_data.id )
-        console.log("BBB total_wins:",  total_wins )
-        console.log("BBB winner_team_image,:", winner_team_image )
-        console.log("BBB bat.match_slug", bat.match_slug )
-        console.log("BBB user_data.email :", bat.opp_email )
+        // console.log("BBBBBBBBB  wins tokens :", total_wins )
+        // console.log("BBB fee :", fee)
+        // console.log("BBB total tokens user tokens :",  getTokens + total_wins - fee )
+        // console.log("BBB bat.id:", bat.id )
+        // console.log("BBB user_data.id:", user_data.id )
+        // console.log("BBB total_wins:",  total_wins )
+        // console.log("BBB winner_team_image,:", winner_team_image )
+        // console.log("BBB bat.match_slug", bat.match_slug )
+        // console.log("BBB user_data.email :", bat.opp_email )
      
 
          const {data: fee_recored, error} = await supabase

@@ -55,7 +55,7 @@ const checkTokens = async (setUserTokens, setShow, setMessage) => {
             .select('tokens')
             .eq('user_id', user.id)
         tokens.map((data) => {
-            console.log('you have :', data.tokens, " tokens")
+            // console.log('you have :', data.tokens, " tokens")
             updateTokens(data.tokens, setUserTokens, setShow, user?.aud)
         })
     }
@@ -131,7 +131,7 @@ async function AddTokenAmount(amount, userTokens, setUserTokens) {
         .eq("user_id", user.id)
         .select()
 
-    console.log(userTokens + amount, "insert 500 tokens", "user.id", "DATA", user.id, user.user_metadata.email, user.user_metadata.name)
+    // console.log(userTokens + amount, "insert 500 tokens", "user.id", "DATA", user.id, user.user_metadata.email, user.user_metadata.name)
     setUserTokens(amount + userTokens)
 }
 

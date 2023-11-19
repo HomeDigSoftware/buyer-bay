@@ -20,9 +20,9 @@ const Welcome = () => {
 
       if (user !== null) 
       { 
-        console.log(user.aud)
+        // console.log(user.aud)
         setTheData(user)
-        getMessages().then((data, i) => console.log(data[0].message));
+        // getMessages().then((data, i) => console.log(data[0].message));
       }
       else
       {
@@ -57,7 +57,7 @@ const Welcome = () => {
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
-    console.log("clickingggggggg")
+    // console.log("clickingggggggg")
 
   };
 

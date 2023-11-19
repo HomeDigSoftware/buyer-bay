@@ -28,7 +28,7 @@ export default function BatUpdate() {
       'postgres_changes',
       { event: 'UPDATE', schema: 'public', table: 'bat_list' },
       (payload) => {
-        console.log('Change received!', payload.new)
+        // console.log('Change received!', payload.new)
         setDataUpdate(payload)
        setTheData(payload.new , dataUpdate)
        
@@ -38,6 +38,6 @@ export default function BatUpdate() {
 }
 
 function setTheData(data_in , dataUpdate , ){
-  console.log("data in dataUpdate : " , dataUpdate)
+  // console.log("data in dataUpdate : " , dataUpdate)
 //   setUpdate(data_in.id)
 }

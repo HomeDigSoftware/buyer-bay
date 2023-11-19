@@ -2,8 +2,8 @@ import React from 'react';
 import OpenBatsCard from './OpenBatsCard.js';
 
 export default function AllBatsPanel({ match }) {
-  console.log("today match id ", match?.id);
-  console.log("upcoming match id ", match?.id);
+  // console.log("today match id ", match?.id);
+  // console.log("upcoming match id ", match?.id);
   return (
 
 

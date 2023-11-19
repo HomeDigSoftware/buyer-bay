@@ -25,7 +25,7 @@ export default function GetAllOpenBats() {
       .gt("month", curr_month - 1)
       .gt("day", (curr_day_in_month));
 
-    console.log("upcoming match  : ", data, data[0]?.id);
+    // console.log("upcoming match  : ", data, data[0]?.id);
     setNextDayOpenBats(data);
 
 
@@ -43,7 +43,7 @@ export default function GetAllOpenBats() {
         month: curr_month,
       })
       .gt("hour", curr_hour);
-    console.log(" D / Y / M / H", curr_day_in_month, curr_year, curr_month, curr_hour);
+    // console.log(" D / Y / M / H", curr_day_in_month, curr_year, curr_month, curr_hour);
     setTodayOpenBats(data);
     setShowPanel(!showPanel);
   }
