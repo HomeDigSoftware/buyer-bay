@@ -9,7 +9,7 @@ import { LolButton, LolGetMatch } from './GetLolData.js';
 import { CsgoButton, CsgoGetMatch } from './GetCsgoData.js';
 import { ValorantButton, ValorantGetMatch } from './GetValorantData.js';
 
-export function GamesButtons({  user}) {
+export default function GamesButtons({  user}) {
   const [csgoMatch, setCsgoMatch] = useState([]);
   const [lolMatch, setLolMatch] = useState([]);
   const [dota2Match, setDota2Match] = useState([]);

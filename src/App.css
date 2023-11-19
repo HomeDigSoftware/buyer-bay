@@ -4,7 +4,6 @@
   margin: auto;
   overflow: hidden;
   overflow: scroll;
-  /* background-image: linear-gradient(to left,  gold , rgb(231, 217, 137)); */
 }
 
 .fifa-matchs {
@@ -15,8 +14,6 @@
 .loby-cont {
   overflow: hidden;
   overflow: scroll;
-  /* background-image: linear-gradient(yellow, orange); */
-  /* background-image:  linear-gradient(to right, rgb(255, 210, 10) ,  #f0e5808a); */
 }
 
 .logo {
@@ -36,7 +33,6 @@
 body,
 .add-tokens-body,
 .add-tokens-menu {
-  /* background-image: linear-gradient(to right,  gold , rgb(231, 217, 137)); */
   background-image: linear-gradient(
     to right,
     rgb(12, 12, 12),
@@ -46,7 +42,6 @@ body,
 
 .login-message {
   position: fixed;
-  /* margin: auto; */
   color: rgb(235, 235, 235);
   font-size: 35px;
  
@@ -64,9 +59,6 @@ body,
   top: 10px;
    left: 0px;
    padding-top: 40px;
-  /* position: fixed;
-  transform: translate(-500px , -250px); */
-  /* position: relative; */
   width: 100%;
   height: 150%;
   background-color: #3333337c;
@@ -91,23 +83,9 @@ body,
   overflow: hidden;
   overflow: scroll;
   border: 5px solid goldenrod;
-  /* display: inline-block; */
- /* transform: translate(-500px , -250px);  */
-
-  /* top: 10px;
-  left: 0px; */
-  /* padding-top: 5px; */
- /* position: fixed;
- /* position: relative; */
- /* width: 100%; */
- /* height: 30%; */
- /* background-color: #3333337c; */
- z-index: 2;
+  z-index: 2;
 }
 .open-batting{
-  /* position: relative; */
-  /* display: inline-block;*/
-  /* transform: translate(-45%,-40%);   */
   width: 90%;
   background-image: linear-gradient(
     to right,
@@ -119,11 +97,9 @@ body,
 }
 
 .batiing-p {
-  /* position: absolute; */
   margin: auto;
   color: rgb(235, 235, 235);
   font-size: 35px;
-  /* right: 25%; */
   height: 50%;
   width: 50%;
   background-image: linear-gradient(
@@ -139,7 +115,6 @@ body,
 
 .panel-background {
   position: absolute;
-  /* position: relative; */
   width: 100%;
   height: 120%;
   background-color: #3333337c;
@@ -149,7 +124,6 @@ body,
   width: 90%;
   height: 80px;
   box-shadow: -2px 2px 1px 1px gold;
-  /* border: 5px solid gold; */
   background-image: linear-gradient(
     to right,
     rgb(116, 102, 23),
@@ -157,7 +131,6 @@ body,
   );
   letter-spacing: 5px;
   color: rgb(255, 254, 169);
-
   margin: 8px;
 }
 
@@ -176,53 +149,6 @@ body,
   color: aliceblue;
 }
 
-/* .sign-out-my{
-    background-color: rgb(147, 147, 231);
-    font-size: 15px;
-    
-
-} */
-
-.chat-bubble {
-  border-radius: 20px 20px 20px 0;
-  padding: 15px;
-  background-color: #3d3f28;
-  color: #fdf253;
-  width: max-content;
-  max-width: calc(100% - 50px);
-  box-shadow: -2px 2px 1px 1px #e3ecf1;
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-.chat-bubble.right {
-  margin-left: auto;
-  border-radius: 20px 20px 0 20px;
-  background-color: #33351f;
-  color: #ddd;
-  box-shadow: -2px 2px 1px 1px gold;
-}
-.chat-bubble__left {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.user-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-  color: #fff562;
-}
-.user-message {
-  word-break: break-all;
-}
-.message-time {
-  display: block;
-  text-align: right;
-}
-
-/* send message */
 .send-message {
   position: fixed;
   bottom: 0px;
@@ -322,23 +248,16 @@ body,
 
 
 .team-image-glow{
-    /* width: 150px;
-    height: 150px; */
     background-color: #fff;
-    /* box-shadow: 0px 0px 40px 20px gold; */
     box-shadow: 0px 0px 40px 20px rgb(255, 115, 0);
-    /* in order: x offset, y offset, blur size, spread size, color */
-    /* blur size and spread size are optional (they default to 0) */
 
 }
 
 .close-btn{
-  /* display: inline-block; */
   width: 50px;
   height: 50px;
   background-color: red;
   position: absolute;
-  /* transform: translate(350px, 350px); */
 }
 
 .send {
@@ -372,7 +291,6 @@ body,
 }
 
 .account-col{
-  /* border: 2px solid black; */
   border-bottom: 2px solid rgb(102, 101, 99);
   padding-top: 5px;
 }
@@ -382,7 +300,6 @@ body,
   margin-top: 10px;
   height: 60px;
   width: 250px;
-  /* background-image: url("./logo-package-GOLD/Singin-logos/pngfind.com-facebook-logo-png-transparent-579959.png"); */
   background-size: cover;
   
 }
@@ -392,7 +309,6 @@ body,
   margin-top: 10px;
   height: 60px;
   width: 250px;
-  /* background-image: url('./logo-package-GOLD/Singin-logos/discord-logo-png-7618.png'); */
   background-size: cover;
   background-color: #333333;
 }
@@ -402,6 +318,5 @@ body,
   margin-top: 10px;
   height: 60px;
   width: auto;
-  /* background-image: url('./logo-package-GOLD/Singin-logos/btn_google_signin_dark_pressed_web.png'); */
   background-size: cover; 
 }

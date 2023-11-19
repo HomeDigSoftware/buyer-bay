@@ -12,7 +12,6 @@ export default function SupaBaseSingIn() {
   const [dbMessage, setDbMessage] = useState({});
   const [click, setClick] = useState(false);
 
-
   const HandleSingIn = async () => {
 
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -25,7 +24,6 @@ export default function SupaBaseSingIn() {
       },
     })
     console.log(data);
-
   }
 
   const handleTwichSingIn = async () => {
@@ -40,13 +38,11 @@ export default function SupaBaseSingIn() {
     })
   }
 
-
   async function handleSingOutUser() {
     const { error } = await supabase.auth.signOut();
     setsupaUser({});
     setClick(false);
   }
-
 
   const getAllMessages = async () => {
     if (supaUser.aud === "authenticated") {
@@ -60,12 +56,10 @@ export default function SupaBaseSingIn() {
     }
   }
 
-
   function dbDataMessages(dbData) {
     setDbMessage(dbData)
     setClick(true)
   }
-
 
   async function handleSendMessage(e) {
     e.preventDefault();
@@ -90,18 +84,15 @@ export default function SupaBaseSingIn() {
     let the_user = {}
     await supabase.auth.getUser().then((value) => {
       if (value.data?.user) {
-        console.log(" This is the supauser : ", value.data.user)
-        // setsupaUser(value.data.user)
+
         the_user = value.data.user;
-        // setsupaUser(the_user)
-        // return
+
       }
     })
     const { data, error } = await supabase
     .from('accounts')
     .select('user_id')
     .eq('user_id', the_user.id) 
-    console.log("NEW API CALL ====> " , data ,data.length ,"<= data.length: the_user.length => ", the_user , the_user.email)
    
     if(data.length === 0 && the_user.aud === "authenticated"){
       console.log("its going throug" ,the_user );
@@ -113,38 +104,16 @@ export default function SupaBaseSingIn() {
             user_name: the_user.user_metadata.name,
             tokens: 2000,
             email: the_user.email,
-            // bating_list: '',
           },
         ])
         .select()
-        // setsupaUser(the_user)
     }
     else{
       if(the_user.aud === "authenticated"){
         setsupaUser(the_user)
       }
-      console.log("you have an account :) great", );//the_user.user_metadata.name
     }
-    // let { data: accounts, error } = await supabase
-    //   .from('accounts')
-    //   .select('user_id')
-
-    // console.log("accounts ++====>", accounts, "=========> ", the_user)
-
-    // accounts.map((userid) => create_New_User(userid, the_user) )
-
   }
-
-//   async function create_New_User(userid, the_user) {
-//     console.log("create_New_User ==> ", userid.user_id)
-//     console.log("create_New_User ==> ", the_user?.id)
-
-//     if (the_user.id !== userid.user_id) {
-//       console.log("Create account : ")
-//       console.log(the_user.id, " <== the_user_id  : userid.user_id ==> ", userid.user_id)
-
-//   }
-// }
   //_________________________________________________________________________
   useEffect(() => {
     async function getUserData() {
@@ -152,40 +121,28 @@ export default function SupaBaseSingIn() {
 
       await supabase.auth.getUser().then((value) => {
         if (value.data?.user) {
-          console.log(" This is the supauser : ", value.data.user)
           setsupaUser(value.data.user)
-          // return
         }
       })
-
     }
-    console.log("use effect")
     getUserData();
     openUserAccount();
-
-    // getAllMessages();
-
   }, [])
   //_________________________________________________________________________
-
-
   supabase.auth.onAuthStateChange(async (event) => {
-    console.log("supabase event ===> ", event)
+    // console.log("supabase event ===> ", event)
     if (event === "SINGED_OUT") {
       console.log("user has log out")
     }
 
-
     if (event === "SIGNED_IN") {
 
       // setsupaUser(supaUser)
-      console.log(" 158 SIGNED_IN ====> ", supaUser.aud, supaUser)
+      // console.log(" 158 SIGNED_IN ====> ", supaUser.aud, supaUser)
     }
 
-
     if (event === "INITIAL_SESSION") {
-      console.log("INITIAL_SESSION")
-
+      // console.log("INITIAL_SESSION")
     }
   })
   return (
@@ -252,9 +209,6 @@ function SingoutButton({ onSingOut }) {
 function LoginButton({ onSingin }) {
   return (
     <div className='google-singin-logo '>
-      {/* <button className="" onClick={onSingin}>
-         Login with google
-      </button> */}
       <img className="google-singin-logo " src={GoogleLogo} alt="login logo" onClick={onSingin} />
     </div>
   );
@@ -263,9 +217,6 @@ function LoginButton({ onSingin }) {
 function TwichLoginButton({ onTwichSingin }) {
   return (
     <div className=''>
-      {/* <button className="twich-singin-logo " onClick={onTwichSingin}>
-         Login with Twich
-      </button> */}
         <img className="twich-singin-logo" src={TwichLogo} alt="login logo" onClick={onTwichSingin} />
     </div>
   );
@@ -275,15 +226,12 @@ function DiscordLoginButton({onDiscordSingin}){
   return(
     <div>
 
-      {/* <button className="discord-singin-logo data-btn" onClick={onDiscordSingin}>Login with Discord */}
        <img className="discord-singin-logo  " src={DiscordLogo} alt="login logo" onClick={onDiscordSingin} />
-      {/* </button> */}
     </div>
   )
 }
 
 function ChatMessages({ dbMessagedata, supaUser }) {
-  // const scroll = useRef();
   return (
     <div>
       <div>
@@ -298,9 +246,7 @@ function ChatMessages({ dbMessagedata, supaUser }) {
             />
             <div className="chat-bubble__right">
               <p className="user-name">{dbMessagedata?.name}</p>
-              <p className="user-message">{dbMessagedata?.message}
-
-              </p>
+              <p className="user-message">{dbMessagedata?.message} </p>
             </div>
           </div>
         </div>

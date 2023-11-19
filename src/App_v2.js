@@ -4,8 +4,8 @@ import axios from "axios";
 import './App.css'
 import { auth } from "./firebase";
 //import { useAuthState } from "react-firebase-hooks/auth";
-import { GamesButtons } from './component/gamesData/GamesButtons.js';
-import { SiteHeader } from './SiteHeader.js';
+import GamesButtons from './component/gamesData/GamesButtons.js';
+import SiteHeader from '../src/component/gamesData/SiteHeader.js';
 import StripTest from './services/StripeTest';
 import StripePaymentRequest from './services/StripePaymentRequest';
 

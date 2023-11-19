@@ -17,21 +17,16 @@ export default function AddTokens({userTokens , setUserTokens}) {
     const [openMenu, setOpenMenu] = useState(false);
     const [show, setShow] = React.useState(false);
     const [user, setUser] = useState({});
-    // const [userTokens, setUserTokens] = useState("");
     const [message, setMessage] = useState(false);
 
     return (
         <div>
             <button className="token-btn m-4 btn btn-secondary"
-                // onClick={() => checkTokens({ openMenu, setOpenMenu, setShow })}
                 onClick={() => openTokenMenu(setShow, setUserTokens, setMessage)}
                 href="#"
             >Add Tokens</button>
             {message ? <LoginMessage setMessage={setMessage}/> : ""}
-            {/* {openMenu ? <div>
-                    {() => setModalShow(true)}</div>: <div></div>} */}
             <MyVerticallyCenteredModal show={show} onHide={() => setShow(false)} currentUser={user} userTokens={userTokens} setUserTokens={setUserTokens} />
-
         </div>
     )
 }
@@ -47,35 +42,20 @@ function LoginMessage({setMessage}) {
 }
 
 function openTokenMenu(setShow, setUserTokens, setMessage) {
-    //  setShow(true);
+
     checkTokens(setUserTokens, setShow, setMessage);
-
-
 }
 
-// async function checkTokens({ openMenu, setOpenMenu, setShow }) {
 const checkTokens = async (setUserTokens, setShow, setMessage) => {
     const { data: { user } } = await supabase.auth.getUser()
-    // const _data = "";
-    // let { data: accounts, error } = await supabase
-    //     .from('accounts')
-    //     .select('*')
 
-    // accounts.map((data) => {
-    //     console.log(data);
-    // })
-
-    console.log(data, "get-user-data", user)
     if (user) {
         let { data: tokens, error02 } = await supabase
             .from('accounts')
             .select('tokens')
             .eq('user_id', user.id)
         tokens.map((data) => {
-            // console.log(data)}
             console.log('you have :', data.tokens, " tokens")
-            // setUserTokens(tokens)
-            //  _data = tokens;
             updateTokens(data.tokens, setUserTokens, setShow, user?.aud)
         })
     }
@@ -83,21 +63,7 @@ const checkTokens = async (setUserTokens, setShow, setMessage) => {
         console.log("you need to loged in to buy Tokens")
         setMessage(true)
     }
-
-    // setUserTokens(_data);
-    // const { data: { theUser } } = await supabase.auth.getUser()
-    // const _user = theUser;
-    // getTheUser({currentUser ,setUser})
-
-
 }
-
-// async function getTheUser({currentUser , setUser}){
-//     const { data: { user } } = await supabase.auth.getUser()
-//     console.log(user.id)
-//     const _user = user
-//    // setUser(_user);
-// }
 
 function updateTokens(tokens, setUserTokens, setShow, user) {
     if (user === "authenticated") {
@@ -106,16 +72,12 @@ function updateTokens(tokens, setUserTokens, setShow, user) {
     } else {
         console.log("You need to LogIn For buying Tokens")
     }
-
-    console.log(tokens)
 }
 
 
 function MyVerticallyCenteredModal({ onHide, show, userTokens, setUserTokens }) {
-    //  const display =  show ?  checkTokens(setUserTokens ) : "";
     return (
         <Modal show={show}
-            // {...props}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -162,22 +124,7 @@ function MyVerticallyCenteredModal({ onHide, show, userTokens, setUserTokens }) 
 
 async function AddTokenAmount(amount, userTokens, setUserTokens) {
     const { data: { user } } = await supabase.auth.getUser()
-    // if(user !== null) {
-    //  console.log(user.aud)
-    //  console.log(user.email)
-
-    // const { data02, insert_error } = await supabase
-    // .from('accounts')
-    // .insert([
-    //   { tokens: amount ,
-    //     user_id: user.id , 
-    //     email: user.user_metadata.email , 
-    //     user_name: user.user_metadata.name ,
-    // } 
-
-    // ])
-    // .select()
-
+   
     const { data, update_error } = await supabase
         .from('accounts')
         .update({ tokens: (amount + userTokens) })
@@ -186,13 +133,5 @@ async function AddTokenAmount(amount, userTokens, setUserTokens) {
 
     console.log(userTokens + amount, "insert 500 tokens", "user.id", "DATA", user.id, user.user_metadata.email, user.user_metadata.name)
     setUserTokens(amount + userTokens)
-    // console.log(user )
 }
 
-// async function UpdateTokens(){
-//     const { data, error } = await supabase
-//     .from('accounts')
-//     .update({ tokens: "500" })
-//     .eq(user_id , 'someValue')
-//     .select()
-// }

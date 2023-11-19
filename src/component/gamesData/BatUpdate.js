@@ -21,16 +21,6 @@ export default function BatUpdate() {
   )
 }
 
-// function TheData(update_01) {
-
-//   return (
-//     <div>
-//        {update_01 !== {}? update_01.map((data) => (console.log(data))) : <div></div>
-// }
-//     </div>
-//   )
-// }
-
 
  async function getBatUpdate(setDataUpdate , dataUpdate) {
   const batList = await supabase.channel('custom-update-channel')
