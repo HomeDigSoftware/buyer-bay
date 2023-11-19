@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../../logo-no-background.png';
+import Logo from '../../logo-package-GOLD/png/logo-no-background.png';
 import "../../App.css"
 import AddTokens from "./AddTokens.js"
 import ShowUserTokens from './ShowUserTokens.js';
