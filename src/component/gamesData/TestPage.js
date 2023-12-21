@@ -3,9 +3,10 @@ import React from 'react'
 
 
 
-export default function TestPage({value}) {
-  console.log(value)
+export default function TestPage() {
   const {id} = useParams();
+  console.log("the id => " , id )
+  
   return (
     <>
     <div clasName='' style={{color:'aliceblue'}}>Test {id}  Page</div>

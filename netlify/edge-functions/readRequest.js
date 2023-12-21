@@ -45,7 +45,7 @@ export default async (req, context) => {
 
        const url = new URL( message , "https://homedigsoftware.com/hook-to-payment/")
         console.log("the new url" , url )
-       return Response.redirect(url)
+       return Response.redirect(url.href)
   }
   
 
