@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react";
+// import PropTypes from "prop-types";
+ import { withRouter } from "react";
 
 // A simple component that shows the pathname of the current location
 class ShowTheLocation extends React.Component {

@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { data } from "autoprefixer";
+import { BuyButton1000k } from "./BuyButton";
 
 
 
@@ -93,7 +94,8 @@ function MyVerticallyCenteredModal({ onHide, show, userTokens, setUserTokens }) 
                 <Container className="add-tokens-menu">
                     <Row>
                         <Col className="sections col-6" >
-                            <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(500, userTokens, setUserTokens) }} >Buy 500 tokens</button>
+                            <BuyButton1000k className='btn'/>
+                            {/* <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(500, userTokens, setUserTokens) }} >Buy 500 tokens</button> */}
                         </Col>
                         <Col className="sections col-6">
                             <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(1000, userTokens, setUserTokens) }}>Buy 1000 tokens</button>

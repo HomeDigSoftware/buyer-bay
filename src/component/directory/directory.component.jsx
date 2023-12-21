@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {withRouter}  from "react-router";
+// import PropTypes from "prop-types";
+// import {withRouter}  from "react-router";
 import MenuItem from '../menu-item/menu-item.component.jsx';
-import PandaScoreAPI from '../Lol-Page/PandaScore.component.jsx'
-import './directory.style.scss'
+// import PandaScoreAPI from '../Lol-Page/PandaScore.component.jsx'
+// import './directory.style.scss'
 
 
 class Dirctrory extends React.Component {

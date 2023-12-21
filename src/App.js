@@ -3,7 +3,7 @@ import './App.css';
 import HomePage from './component/homepage.component';
 import { createBrowserRouter, Link, Routes, Route, RouterProvider, createRoutesFromElements } from "react-router-dom";
 import RootLayout from './component/layout/RootLayout.component';
-import './component/menu-item/menu-item.style.scss'
+// import './component/menu-item/menu-item.style.scss'
 import LolPage from './component/Lol-Page/Lolpage.component'
 import PandaScore from './component/Lol-Page/PandaScore.component';
 

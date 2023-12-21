@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import './menu-item.style.scss'
+//   import './menu-item.style.scss'
 
 
 

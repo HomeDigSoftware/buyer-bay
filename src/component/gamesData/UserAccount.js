@@ -125,11 +125,14 @@ export async function check_Winner(user_data, userTeam, setWinnerTeamData, setWi
         })
         const theData = await server_response.text();
         const text = JSON.parse(theData)
+        console.log(theData);
         // console.log(" new API call test", text.upcoming.slug);
         // console.log(" the Winner : ", text.upcoming.winner?.name);
-        if (text.upcoming.winner !== null) {
-            setWinnerTeam(text.upcoming.winner.id)
-            setWinnerTeamData(text.upcoming.winner)
+        if (text.upcoming.winner !== undefined) {
+            console.log(text.upcoming.winner);
+           
+            setWinnerTeam(text.upcoming.winner?.id)
+            setWinnerTeamData(text.upcoming?.winner)
             winnerUpdate(bat, user_data, userTeam, text.upcoming.winner, bat.tokens, setWinnerEmail, setTeamImage ,setTeamName)
         }
     }

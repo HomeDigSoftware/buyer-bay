@@ -53,7 +53,7 @@ export default function GetAllOpenBats() {
         onClick={() => getUpcoming()}>
         today bats
       </button>
-      {showPanel ? <BatsCard nextBats={nextDayOpenBats} todaybats={todayOpenBats} /> : <div></div>}
+      {showPanel ? <BatsCard nextBats={nextDayOpenBats} todaybats={todayOpenBats} setShowPanel={setShowPanel} /> : <div></div>}
    
     </div>
 
