@@ -90,8 +90,8 @@ const Root = () => {
           <Route path='homepage' element={<HomePage />} />
           <Route path='account' element={<Lolpage />} />
           <Route path='hook-to-payment/:id' element={<TestPage />} />       
-          <Route path=':id' element={<TestPage />}  />  
-               
+          {/* <Route path=':id' element={<TestPage />}  />   */}
+
       </Route>
     )
   )

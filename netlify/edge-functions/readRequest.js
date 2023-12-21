@@ -36,14 +36,14 @@ export default async (req, context) => {
     //   return new Response("forbidden", { status: 403 })
     // }
   const message = JSON.stringify(body.id)
-    console.log('000000000000000000000000' , JSON.stringify(body.id));
-    console.log('000000000000000000000000' , JSON.stringify(body.type));
-    console.log('000000000000000000000000' , JSON.stringify(body.api_version));
-    console.log("YYYYYYYYYYYY++++++++++++++++++++++++++++++++++++" ,JSON.stringify(body.data.object.amount))
+    // console.log('000000000000000000000000' , JSON.stringify(body.id));
+    // console.log('000000000000000000000000' , JSON.stringify(body.type));
+    // console.log('000000000000000000000000' , JSON.stringify(body.api_version));
+    // console.log("YYYYYYYYYYYY++++++++++++++++++++++++++++++++++++" ,JSON.stringify(body.data.object.amount))
     // checkTokens();
        const data = context.next( new Request(req ,{body: JSON.stringify(body) }  ));
 
-       const url = new URL( message , req.url)
+       const url = new URL( message , "https://homedigsoftware.com/hook-to-payment/")
         console.log("the new url" , url )
        return Response.redirect(url)
   }
