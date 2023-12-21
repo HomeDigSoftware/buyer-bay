@@ -43,9 +43,9 @@ export default async (req, context) => {
     // checkTokens();
        const data = context.next( new Request(req ,{body: JSON.stringify(body) }  ));
 
-       const url = new URL( message , "http://localhost:8888/")
-        console.log("the new url" , url.href )
-       return Response.redirect(url.href)
+       const url = new URL( message , req.url)
+        console.log("the new url" , url )
+       return Response.redirect(url)
   }
   
 
