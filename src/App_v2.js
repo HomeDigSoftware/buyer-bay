@@ -89,7 +89,8 @@ const Root = () => {
           <Route index element={<MainPage />} />
           <Route path='homepage' element={<HomePage />} />
           <Route path='account' element={<Lolpage />} />
-          <Route path='hook-to-payment/:id' element={<TestPage />} />       
+          <Route path='read/hook-to-payment/:id' element={<TestPage />} />       
+          {/* <Route path='hook-to-payment/:id' element={<TestPage />} />        */}
           {/* <Route path=':id' element={<TestPage />}  />   */}
 
       </Route>
