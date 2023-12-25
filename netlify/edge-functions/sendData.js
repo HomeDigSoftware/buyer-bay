@@ -1,7 +1,10 @@
+
+
+
 var receipt = "";
 var client_sec = "";
-export default async (req  ) =>{
-    
+export default async (req, context) =>{
+   
     const data_in = await req.json();
     
     // const supabaseUrl = "https://tlgrpirsqcbfnvysjxwx.supabase.co/rest/v1/payments"
@@ -43,9 +46,11 @@ export default async (req  ) =>{
     .catch(error => console.log('Error:', error));
 
   }
-  console.log(data_in.id)
-  console.log(client_sec)
-
+  console.log("_____________________", data_in.id)
+  console.log("______________________" , client_sec)
+  return new Response("Hello, World!", {
+    headers: { "content-type": "text/html" }
+  }); 
 }
 
 export const config = {path: '/senddata'};
