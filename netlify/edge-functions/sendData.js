@@ -49,7 +49,7 @@ export default async (req, context) =>{
   console.log("_____________________", data_in.id)
   console.log("______________________" , client_sec)
   return new Response("Hello, World!", {
-    headers: { "content-type": "text/html" }
+    headers: { "content-type": "application/json" }
   }); 
 }
 
