@@ -1,16 +1,17 @@
 
 
+  var receipt = "";
+    var client_sec = "";
 
-var receipt = "";
-var client_sec = "";
-export default async (req, context) =>{
-   
+export default async (req) =>{
+  
     const data_in = await req.json();
     
     // const supabaseUrl = "https://tlgrpirsqcbfnvysjxwx.supabase.co/rest/v1/payments"
     const supabaseUrl = process.env.REACT_APP_SUPABASE_URL_PAY_CHECK;
-     const apiKey = process.env.REACT_APP_SUPABASE_KEY;
-
+    // const apiKey = process.env.REACT_APP_SUPABASE_KEY;
+    const apiKey = process.env.REACT_APP_SUPABASE_KEY;
+    console.log("data in typeeeeee" , data_in.type)
     if(data_in.type === "charge.succeeded"){
         receipt = data_in.data.object.receipt_url;
         console.log("the receipt ==> " , receipt)
@@ -47,7 +48,7 @@ export default async (req, context) =>{
 
   }
   console.log("_____________________", data_in.id)
-  console.log("______________________" , client_sec)
+  console.log("______________________" , data_in.data.object.client_secret)
   return new Response("Hello, World!", {
     headers: { "content-type": "application/json" }
   }); 
