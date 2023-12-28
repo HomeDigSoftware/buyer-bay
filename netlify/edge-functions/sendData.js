@@ -21,37 +21,56 @@ export default async (req) =>{
         console.log("client ====> ", client_sec)
     }
   
-    if(data_in.type === "payment_intent.succeeded"){
-            console.log("++++++++++++++++++", data_in.type , "++++++++++++" , receipt)
-    
-    const postData = {
-        payment_id : data_in.id ,
-        // amount: data_in.api_version,
-        amount: data_in.data.object.amount ,
-        receipt_url : receipt,
-        client_sec: client_sec,
+    if(data_in.type === "payment_intent.succeeded" || data_in.type === "checkout.session.completed"){
+      console.log("++++++++++++++++++", data_in.type, "++++++++++++", receipt);
+      switch (data_in.type) {
+        case "payment_intent.succeeded":
+          const postData_succ = {
+            payment_id: data_in.id,
+            // amount: data_in.api_version,
+            amount: data_in.data.object.amount,
+            receipt_url: receipt,
+            client_sec: client_sec,
+          };
+          newFunction(postData_succ, apiKey, supabaseUrl);
+          break;
+
+        case "payment_intent.completed":
+          const postData_comp = {
+            payment_id: data_in.id,
+            // amount: data_in.api_version,
+            amount: data_in.data.object.amount_total,
+            email: data_in.data.object.customer_details.email,
+            name: data_in.data.object.customer_details.name,
+          };
+          newFunction(postData_comp, apiKey, supabaseUrl);
+          break;
+      }
     }
-
-    const reqOptions = {
-        method: 'POST' , 
-        headers: {
-            'Content-Type' : 'application/json' , 
-            'apikey' : apiKey,
-        },
-        body: JSON.stringify(postData),
-    };
-
-    fetch(supabaseUrl , reqOptions)
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch(error => console.log('Error:', error));
-
-  }
   console.log("_____________________", data_in.id)
   console.log("______________________" , data_in.data.object.client_secret)
   return new Response("Hello, World!", {
     headers: { "content-type": "application/json" }
   }); 
+}
+
+
+function newFunction(postData, apiKey, supabaseUrl) {
+
+
+  const reqOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': apiKey,
+    },
+    body: JSON.stringify(postData),
+  };
+
+  fetch(supabaseUrl, reqOptions)
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch(error => console.log('Error:', error));
 }
 
 export const config = {path: '/senddata'};
