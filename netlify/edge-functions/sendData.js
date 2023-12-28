@@ -22,7 +22,7 @@ export default async (req) =>{
     }
   
     if(data_in.type === "payment_intent.succeeded" || data_in.type === "checkout.session.completed"){
-      console.log("++++++++++++++++++", data_in.type, "++++++++++++", receipt);
+      console.log("+++++++__+++++++++++", data_in.type, "++++___++++++++");
       switch (data_in.type) {
         case "payment_intent.succeeded":
           const postData_succ = {
