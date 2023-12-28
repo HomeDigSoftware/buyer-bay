@@ -35,7 +35,7 @@ export default async (req) =>{
           newFunction(postData_succ, apiKey, supabaseUrl);
           break;
 
-        case "payment_intent.completed":
+        case "checkout.session.completed":
           const postData_comp = {
             payment_id: data_in.id,
             // amount: data_in.api_version,
