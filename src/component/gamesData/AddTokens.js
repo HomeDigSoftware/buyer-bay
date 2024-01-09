@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { data } from "autoprefixer";
 import { BuyButton1000k } from "./BuyButton";
-
+import stripe from "stripe" 
 
 
 
@@ -107,10 +107,11 @@ function MyVerticallyCenteredModal({ onHide, show, userTokens, setUserTokens }) 
                             <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(5000, userTokens, setUserTokens) }}>Buy 5000 tokens</button>
                         </Col>
                         <Col xs={6} md={4} className="sections">
-                            <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(10000, userTokens, setUserTokens) }}>Buy 10000 tokens</button>
+                            <button className="token-btn m-2 btn btn-secondary" onClick={() => { get_Payment_Info() }}>Buy 10000 tokens</button>
                         </Col>
                         <Col xs={6} md={4} className="sections">
-                            <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(100000, userTokens, setUserTokens) }}>Buy 100000 tokens</button>
+                        {/* <button className="token-btn m-2 btn btn-secondary" onClick={() => { AddTokenAmount(100000, userTokens, setUserTokens) }}>Buy 100000 tokens</button> */}
+                            <button className="token-btn m-2 btn btn-secondary" onClick={() => { stripe_call_test() }}>Buy 100000 tokens</button>
 
                         </Col>
                     </Row>
@@ -137,3 +138,28 @@ async function AddTokenAmount(amount, userTokens, setUserTokens) {
     setUserTokens(amount + userTokens)
 }
 
+async function stripe_call_test(){
+    const stripe_call = (await fetch("/api/stripe" , {
+      method: "POST" , 
+      body: JSON.stringify({
+        game: "csgo"
+      })
+    }))
+ 
+    const data = await stripe_call.text();
+    // const data01 = JSON.parse(server_getCall);
+   const dataText = JSON.parse(data);
+     console.log(" stripe DATA :",dataText)
+}
+
+async function get_Payment_Info(){
+    const payment_data = (await fetch("/api/stripe_retrive" ,{
+        method: "POST",
+         body: JSON.stringify({
+            from: "server"
+         }) 
+    })) 
+    const data = await payment_data.text();
+    const data_Text = JSON.parse(data);
+    console.log("Payment Data ==>" , data_Text)
+}

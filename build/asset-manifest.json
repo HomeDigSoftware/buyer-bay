@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.ec34ea07.css",
-    "main.js": "/static/js/main.d2b4a5ad.js",
+    "main.js": "/static/js/main.d6870327.js",
     "static/media/pngfind.com-facebook-logo-png-transparent-579959.png": "/static/media/pngfind.com-facebook-logo-png-transparent-579959.d8bafec460af2226edb6.png",
     "static/media/logo-no-background.png": "/static/media/logo-no-background.18cfbbe8136550ce4fcd.png",
     "static/media/fraction.cjs": "/static/media/fraction.a641cd80e2310e4e5e60.cjs",
     "index.html": "/index.html",
     "static/media/index.cjs": "/static/media/index.cd351d7c31d0d3fccf96.cjs",
     "main.ec34ea07.css.map": "/static/css/main.ec34ea07.css.map",
-    "main.d2b4a5ad.js.map": "/static/js/main.d2b4a5ad.js.map"
+    "main.d6870327.js.map": "/static/js/main.d6870327.js.map"
   },
   "entrypoints": [
     "static/css/main.ec34ea07.css",
-    "static/js/main.d2b4a5ad.js"
+    "static/js/main.d6870327.js"
   ]
 }

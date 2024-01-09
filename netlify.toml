@@ -12,6 +12,8 @@ publish = "build"
 # publish = "dist" # If you use a _redirect file, provide the path to your static content folder
 # targetPort = 3000 # # The port for your application server, framework or site generator
 
-[[redirect]]
- from = "/read"
- to = "/hook-to-payment"
+
+[[redirects]]
+  from = '/api/*'
+  to = '/.netlify/functions/:splat'
+  status = 200
