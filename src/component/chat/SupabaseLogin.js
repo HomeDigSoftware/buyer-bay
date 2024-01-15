@@ -84,8 +84,8 @@ export default function SupaBaseSingIn() {
     let the_user = {}
     await supabase.auth.getUser().then((value) => {
       if (value.data?.user) {
-
         the_user = value.data.user;
+        console.log("the_user ==> : " , the_user)
 
       }
     })

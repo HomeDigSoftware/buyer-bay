@@ -4,13 +4,16 @@
     var receipt = "";
     var client_sec = "";
     var stripe_Event = "";
+    var email = '';
 
 // geting the  data from stripe
 export default async (req) =>{
     
     const supabaseUrl_Pay = process.env.REACT_APP_SUPABASE_URL_PAY_CHECK;  
-    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
-    const apiKey = process.env.REACT_APP_SUPABASE_KEY;
+    // const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
+    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL_NEW_DB;
+    const apiKey = process.env.REACT_APP_SUPABASE_KEY_NEW_DB;
+    // const apiKey = process.env.REACT_APP_SUPABASE_KEY;
 
     const supabase = createClient(supabaseUrl, apiKey)
    
@@ -39,11 +42,15 @@ export default async (req) =>{
    
   
     if(data_in.type === "payment_intent.succeeded" || data_in.type === "checkout.session.completed"){
-  
+     
       switch (data_in.type) {
-        case "payment_intent.succeeded":
-
-        console.log('stripe EVENT ====> ' ,  stripe_Event);
+        case "payment_intent.succeeded":      
+          let client_name_01 = data_in.data.object.shipping.name ;
+        console.log(' email <<==>> email stripe EVENT ====> email '  ,client_name_01, stripe_Event);
+        let rpc_Func = await supabase.rpc('pass_to_db', { name_input : client_name_01 , pay_id : data_in.data.object.id})
+        // let rpc_Func = await supabase.rpc('get_data_stripe', { name_input : client_name_01 , pay_id : data_in.data.object.id})
+        .then(data => console.log('Success==>:', data))
+        .catch(error => console.log('Error:', error));
         //   let client_name = "testing_data";
         //   console.log(" data_in.data.object.id =======>" ,
         //                 data_in.data.object.id , "name : ====> " ,
@@ -69,9 +76,11 @@ export default async (req) =>{
            break;
 
         case "checkout.session.completed":
-           console.log('stripe EVENT ====> ', data_in.data.object.customer_details.name ,  stripe_Event ,"AAAAAAAAAAAAAAAAAAAAAAAAAAA" , data_in.data.object.payment_intent);
+          data_in.type === "checkout.session.completed" ? email = data_in.data.object.customer_details.email : email = '';
+
+           console.log('stripe EVENT ====> email',email, data_in.data.object.customer_details.name ,  stripe_Event ,receipt,"AAAAAAAAAAAAAAAAAAAAAAAAAAA" , data_in.data.object.payment_intent);
             let client_name = data_in.data.object.customer_details.name ;
-            await supabase.rpc('pass_to_db', { name_input : client_name , pay_id : data_in.data.object.payment_intent})
+            await supabase.rpc('stripe_data', { name_input : client_name , pay_id : data_in.data.object.payment_intent , user_email : data_in.data.object.customer_details.email})
             .then(data => console.log('Success==>:', data))
             .catch(error => console.log('Error:', error));
             console.log("_______________________________________________________________________")
