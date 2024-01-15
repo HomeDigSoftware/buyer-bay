@@ -64,7 +64,7 @@
                 authorization: `Bearer ${process.env.REACT_APP_SUPABASE_KEY}`
               }}
 
-        const supabaseEndpoint = "https://tlgrpirsqcbfnvysjxwx.supabase.co/rest/v1/payments"
+        const supabaseEndpoint = "https://yxckxaoqczjtpkasichg.supabase.co"
         const response = await fetch(supabaseEndpoint , options)
         const data001 = await response.json()
      
