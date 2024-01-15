@@ -1,5 +1,5 @@
- import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.1"
-// import { createClient } from '@supabase/supabase-js'
+//  import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.1"
+ import { createClient } from '@supabase/supabase-js'
 
   var receipt = "";
     var client_sec = "";
@@ -10,9 +10,9 @@ export default async (req) =>{
     
     // const supabaseUrl = "https://tlgrpirsqcbfnvysjxwx.supabase.co/rest/v1/payments"
      const supabaseUrl_Pay = process.env.REACT_APP_SUPABASE_URL_PAY_CHECK;  
-    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
+    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL_NEW_DB
     // const apiKey = process.env.REACT_APP_SUPABASE_KEY;
-    const apiKey = process.env.REACT_APP_SUPABASE_KEY;
+    const apiKey = process.env.REACT_APP_SUPABASE_KEY_NEW_DB;
     const supabase = createClient(supabaseUrl, apiKey)
 
     

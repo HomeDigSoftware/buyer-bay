@@ -1,5 +1,5 @@
-//  import { createClient } from '@supabase/supabase-js'
- import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.1"
+  import { createClient } from '@supabase/supabase-js'
+//  import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.1"
 
     var receipt = "";
     var client_sec = "";
@@ -9,7 +9,7 @@
 // geting the  data from stripe
 export default async (req) =>{
     
-    const supabaseUrl_Pay = process.env.REACT_APP_SUPABASE_URL_PAY_CHECK;  
+    // const supabaseUrl_Pay = process.env.REACT_APP_SUPABASE_URL_PAY_CHECK;  
     // const supabaseUrl = process.env.REACT_APP_SUPABASE_URL
     const supabaseUrl = process.env.REACT_APP_SUPABASE_URL_NEW_DB;
     const apiKey = process.env.REACT_APP_SUPABASE_KEY_NEW_DB;
@@ -80,6 +80,7 @@ export default async (req) =>{
 
            console.log('stripe EVENT ====> email',email, data_in.data.object.customer_details.name ,  stripe_Event ,receipt,"AAAAAAAAAAAAAAAAAAAAAAAAAAA" , data_in.data.object.payment_intent);
             let client_name = data_in.data.object.customer_details.name ;
+        // let rpc_Func = await supabase.rpc('stripe_check_and_update', { name_input : client_name_01 , pay_id : data_in.data.object.id , pay_info : receipt})
             await supabase.rpc('stripe_data', { name_input : client_name , pay_id : data_in.data.object.payment_intent , user_email : data_in.data.object.customer_details.email})
             .then(data => console.log('Success==>:', data))
             .catch(error => console.log('Error:', error));
