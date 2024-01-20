@@ -8,12 +8,14 @@ import { Dota2Button, Dota2GetMatch } from './GetDota2Data.js';
 import { LolButton, LolGetMatch } from './GetLolData.js';
 import { CsgoButton, CsgoGetMatch } from './GetCsgoData.js';
 import { ValorantButton, ValorantGetMatch } from './GetValorantData.js';
+import {CallOfDutyGetMatch , Call_Of_Duty_Button} from './GetCallOfDutyData.js';
 
 export default function GamesButtons({  user}) {
   const [csgoMatch, setCsgoMatch] = useState([]);
   const [lolMatch, setLolMatch] = useState([]);
   const [dota2Match, setDota2Match] = useState([]);
   const [valorantMatch, setValorantMatch] = useState([]);
+  const [callOfDutyMatch, setCallOfDutyMatch] = useState([]);
 
   return (
     <div className='container-fluid text-center h-10 justify-center '>
@@ -31,6 +33,7 @@ export default function GamesButtons({  user}) {
           <CsgoButton setCsgoMatch={setCsgoMatch}/>
           <LolButton setLolMatch={setLolMatch} />
           <Dota2Button setDota2Match={setDota2Match} />
+          <Call_Of_Duty_Button setCallOfDutyMatch={setCallOfDutyMatch} />
           </div>
      
         <div className='col-5'>
@@ -43,6 +46,7 @@ export default function GamesButtons({  user}) {
             <CsgoGetMatch csgoMatch={csgoMatch}  />
             <Dota2GetMatch dota2Match={dota2Match} />
             <LolGetMatch lolMatch={lolMatch}  />
+            <CallOfDutyGetMatch callOfDutyMatch={callOfDutyMatch} />
             {/* <ValorantGetMatch valorantMatch={valorantMatch} onGetMatch={handleGetValorant} /> */}
           </div>
         </div>

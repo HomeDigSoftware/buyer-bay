@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import TeamCard from './TeamCard.js';
+import supabase from '../../services/supabase.js';
 import axios from 'axios';
 
 
 
+// *** seat on the layout component (GamesButton.js)
+// *** start the data fetch from panda score with a server-less function 
 export function ValorantButton({ setValorantMatch }) {
   return (
     <div className='valorant-card'>
       {/* <button className="data-btn" onClick={() => handleGetValorant(setValorantMatch )}> */}
-      <button className="data-btn" onClick={() => onGetData(setValorantMatch )}>
+      <button className="data-btn" onClick={() => fetchGameList(setValorantMatch )}>
+      {/* <button className="data-btn" onClick={() => onGetData(setValorantMatch )}> */}
         Valorant
       </button>
     </div>
@@ -21,6 +25,9 @@ export function ValorantButton({ setValorantMatch }) {
 //   body: JSON.stringify({
 //     region: 'hoenn'
 //   })
+
+
+// *** call the netlify server-less function that call the PandaScore API 
 async function onGetData(setValorantMatch){
   // console.log("start")
   const server_response = await fetch('/.netlify/functions/getMatchsApi' , {
@@ -34,16 +41,42 @@ async function onGetData(setValorantMatch){
   // console.log("the data ========== " , theData.upcoming);
   const text = JSON.parse(theData)
   // console.log(text.upcoming);
+
+  // ***seting the data from the API call to 
+ // ***pandaScore to the useState (setValorantMatch)
+ // ***that is on the (GameButton.js) script
   setValorantMatch(text.upcoming)
 
  
 
 } 
 
+// ***new get the game list from the app supabase DB 
+// ***saving on api call and traffic to pandascore 
+async function fetchGameList(setValorantMatch){
 
+  let { data, error } = await supabase
+  .from('dota_2_game_list')
+  .select('game_list')
+  
 
+   const db_data = data[0].game_list;
+ 
+   // ***seting the data from the API call to 
+   // ***pandaScore to the useState (setCsgoMatch)
+   // ***that is on the (GameButton.js) script
+   setValorantMatch(db_data)
 
+   db_data.map((game => (
+    console.log('league DATA ' ,
+    ' \n id : ' , game.league.id ,
+    ' \n name : ' , game.league.name,  
+    '\n slug : ' , game.league.slug , 
+    '\n image_url : ' , game.league.image_url  )
+   )));
+ 
 
+}
 
 
 export function ValorantGetMatch({ valorantMatch }) {

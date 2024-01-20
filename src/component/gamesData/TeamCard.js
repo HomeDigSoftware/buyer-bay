@@ -43,10 +43,11 @@ export default function TeamCard({ data }) {
           </div>
           <div className="data text-center">
             <h2 className="game-name">{data.videogame.name}</h2>
+            <h6 style={{color:'white'}}> league: {data.league.name}</h6>
             <h3 className="time">{data.begin_at}</h3>
             <p className="game-data ">
               {data.match_type} : {data.number_of_games} <br />
-              <label> game id: {data.games[0]?.id}</label>
+              <label> game id: {data.games[0]?.id}</label> <br />
             </p>
             <p className="links">
               <a className="links" href={data.streams_list[0]?.raw_url}>
