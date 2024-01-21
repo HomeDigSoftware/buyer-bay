@@ -46,7 +46,7 @@ async function getLolMatchApiCall(setLolMatch){
 async function fetchGameList(setLolMatch){
 
   let { data, error } = await supabase
-  .from('dota_2_game_list')
+  .from('lol_game_list')
   .select('game_list')
   
 

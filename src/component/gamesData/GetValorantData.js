@@ -56,7 +56,7 @@ async function onGetData(setValorantMatch){
 async function fetchGameList(setValorantMatch){
 
   let { data, error } = await supabase
-  .from('dota_2_game_list')
+  .from('valorant_game_list')
   .select('game_list')
   
 
